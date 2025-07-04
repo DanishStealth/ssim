@@ -272,29 +272,31 @@ export default function AcademicPrograms() {
                 <p key={index}>{paragraph}</p>
               ))}
             </div>
-            <Button
-              className="group gap-0 px-0 py-0 h-0 rounded-none mt-8"
-              size="lg"
-              onClick={() => handleKnowMoreClick(features[activeVideo].link)}
+            <Link
+              to={features[activeVideo].link}
+              className="group gap-0 px-0 py-0 h-0 rounded-none mt-8 inline-flex"
+              onClick={scrollToTop}
             >
-              <div className="bg-red-600 mt-8 h-11 flex items-center px-4 hover:bg-red-700">
+              <div className="bg-red-600 text-white mt-8 h-11 flex items-center px-4 hover:bg-red-700">
                 Know More
               </div>
-              <div className="bg-mainBlue mt-8 h-11 flex items-center px-4">
+              <div className="bg-mainBlue text-white mt-8 h-11 flex items-center px-4">
                 <ArrowRight className="w-4 bg-mainBlue h-4 transition-transform group-hover:translate-x-1" />
               </div>
-            </Button>
-            <Button
-              className="group gap-0 px-0 py-0 h-0 ml-5 sm:ml-8 rounded-none mt-8"
-              size="lg"
-            >
-              <div className="bg-transparent text-black mt-8 h-11 flex items-center px-4 border border-black border-r-0">
-                Apply Now
-              </div>
-              <div className="bg-red-600 mt-8 h-11 flex items-center px-4">
-                <ArrowRight className="w-4 bg-red-600 h-4 transition-transform group-hover:translate-x-1" />
-              </div>
-            </Button>
+            </Link>
+            <a href="https://apply.ssim.ac.in" target="_blank">
+              <Button
+                className="group gap-0 px-0 py-0 h-0 ml-5 sm:ml-8 rounded-none mt-8"
+                size="lg"
+              >
+                <div className="bg-transparent text-black mt-8 h-11 flex items-center px-4 border border-black border-r-0">
+                  Apply Now
+                </div>
+                <div className="bg-red-600 mt-8 h-11 flex items-center px-4">
+                  <ArrowRight className="w-4 bg-red-600 h-4 transition-transform group-hover:translate-x-1" />
+                </div>
+              </Button>
+            </a>
           </div>
         </div>
 

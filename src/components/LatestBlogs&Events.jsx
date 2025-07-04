@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Calendar } from "lucide-react";
+import { ArrowRight, Calendar } from "lucide-react";
 import Heading from "@/components/Heading";
 import Container from "@/components/wrappers/Container";
 import { AnimatedList } from "@/components/ui/animated-list";
+import { Button } from "./ui/button";
+import { Link } from "react-router-dom";
 
 export default function LatestBlogsAndEvents() {
   const [posts, setPosts] = useState([]);
@@ -15,7 +17,9 @@ export default function LatestBlogsAndEvents() {
     async function fetchBlogPosts() {
       try {
         setIsLoading(true);
-        const response = await fetch("https://ssim.ac.in/wp-json/wp/v2/posts/?_embed");
+        const response = await fetch(
+          "https://ssim.ac.in/wp-json/wp/v2/posts/?_embed"
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch blog posts");
         }
@@ -41,52 +45,77 @@ export default function LatestBlogsAndEvents() {
   const eventPosts = posts.length > 1 ? posts.slice(1, 5) : [];
 
   return (
-    <Container className="">
-      <Heading
-        title="Explore Latest Blogs"
-        titleClassName="lg:font-extrabold font-bold text-mainBlue"
-        className="w-full text-center sm:col-span-4 "
-      />
+    <>
+      <Container className="!pb-20">
+        <Heading
+          title="Explore Latest Blogs"
+          titleClassName="lg:font-extrabold font-bold text-mainBlue"
+          className="w-full text-center sm:col-span-4 "
+        />
 
-      {isLoading ? (
-        <div className="flex items-center justify-center h-[500px]">
-          <p>Loading blog posts...</p>
-        </div>
-      ) : error ? (
-        <div className="flex items-center justify-center h-[500px]">
-          <p className="text-red-500">Error: {error}</p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 h-[720px] sm:max-h-[500px]">
-          {latestPost && (
-            <a href={`/blog/${latestPost.slug}`}>
-              {" "}
-              <FirstBlog post={latestPost} />{" "}
-            </a>
-          )}
-          <div className="grid grid-cols-1 gap-5 relative overflow-hidden h-full">
-            <AnimatedList>
-              {eventPosts.map((post) => (
-                <a href={post.link} key={post.id}>
-                  <EventCard
-                    key={post.id}
-                    id={post.id}
-                                      image={
-                    post._embedded?.['wp:featuredmedia']?.[0]?.source_url || ""
-                  }
-                    title={post.title?.rendered || ""}
-                    date={new Date(post.date).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                    })}
-                  />
-                </a>
-              ))}
-            </AnimatedList>
+        {isLoading ? (
+          <div className="flex items-center justify-center h-[500px]">
+            <p>Loading blog posts...</p>
           </div>
-        </div>
-      )}
-    </Container>
+        ) : error ? (
+          <div className="flex items-center justify-center h-[500px]">
+            <p className="text-red-500">Error: {error}</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 h-[720px] sm:max-h-[500px]">
+            {latestPost && (
+              <a href={`/blog/${latestPost.slug}`}>
+                {" "}
+                <FirstBlog post={latestPost} />{" "}
+              </a>
+            )}
+            <div className="grid grid-cols-1 gap-5 relative overflow-hidden h-full">
+              <AnimatedList>
+                {eventPosts.map((post) => (
+                  <a href={post.link} key={post.id}>
+                    <EventCard
+                      key={post.id}
+                      id={post.id}
+                      image={
+                        post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
+                        ""
+                      }
+                      title={post.title?.rendered || ""}
+                      date={new Date(post.date).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                      })}
+                    />
+                  </a>
+                ))}
+              </AnimatedList>
+            </div>
+          </div>
+        )}
+        <Link
+          to="/blogs"
+          className="flex justify-center mt-8"
+          onClick={() => {
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          }}
+        >
+          <Button
+            className="group gap-0 px-0 py-0 h-0 rounded-none mt-8"
+            size="lg"
+          >
+            <div className="bg-red-600 mt-8 h-11 flex items-center pl-8 pr-4 hover:bg-red-700">
+              View All Blogs
+            </div>
+            <div className="bg-mainBlue mt-8 h-11 flex items-center px-4">
+              <ArrowRight className="w-4 bg-mainBlue h-4 transition-transform group-hover:translate-x-1" />
+            </div>
+          </Button>
+        </Link>
+      </Container>
+    </>
   );
 }
 
@@ -117,7 +146,7 @@ const EventCard = ({ id, image, title, date }) => {
 };
 
 const FirstBlog = ({ post }) => {
-  const imageUrl = post._embedded?.['wp:featuredmedia']?.[0]?.source_url || "";
+  const imageUrl = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "";
   const title = post.title?.rendered || "";
   const date = new Date(post.date).toLocaleDateString("en-US", {
     year: "numeric",

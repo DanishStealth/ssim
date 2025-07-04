@@ -24,16 +24,14 @@ import citi from "../assets/Home/citi-logo.svg";
 import cognizant from "../assets/Home/cognizant.svg";
 import dabur from "../assets/Home/dabur.png";
 import innova from "../assets/Home/innova-logo.svg";
-
-
+import { Link } from "react-router-dom";
 
 // Testimonials data
 const testimonials = [
   {
     name: "Aditya Datta ",
     role: "Executive Director",
-    company:
-      jpmc,
+    company: jpmc,
     text: "Inspiring leadership qualities. Always pushes the team forward with innovative solutions and creative problem-solving approaches.",
     rating: 5,
   },
@@ -54,24 +52,21 @@ const testimonials = [
   {
     name: "Jaideep Avasarala",
     role: "Talent Acquisition Leader",
-    company:
-      microsoft,
+    company: microsoft,
     text: "An amazing communicator who always keeps the team informed. Her ability to connect with clients is unmatched.",
     rating: 4,
   },
   {
     name: "Niraj Kumar Rana",
     role: "EVP & Head of Sales",
-    company:
-      naukri,
+    company: naukri,
     text: "Brings incredible data insights to every project. His analytical skills and attention to detail make all the difference.",
     rating: 5,
   },
   {
     name: "Parameshwar N",
     role: "Vice-President Customer Engagement",
-    company:
-      sbi,
+    company: sbi,
     text: "An extraordinary thinker who knows how to capture the essence of our brand in every piece of content.",
     rating: 5,
   },
@@ -85,16 +80,14 @@ const testimonials = [
   {
     name: "Umesh Golecha",
     role: "Director",
-    company:
-      innova,
+    company: innova,
     text: "Her designs are always fresh and creative, perfectly capturing the essence of every project.",
     rating: 5,
   },
   {
     name: "Ankit Bhadauriya",
     role: "National Key Account Manager",
-    company:
-      dabur,
+    company: dabur,
     text: "Has a knack for making our systems run smoothly. A key player in maintaining our infrastructure.",
     rating: 4,
   },
@@ -136,7 +129,9 @@ const RadialIcons = () => {
       const timer = setInterval(() => {
         setIsAnimating(true);
         setTimeout(() => {
-          setActiveIndex((prev) => (prev === totalTestimonials - 1 ? 0 : prev + 1));
+          setActiveIndex((prev) =>
+            prev === totalTestimonials - 1 ? 0 : prev + 1
+          );
           setIsAnimating(false);
         }, 500);
       }, 3000);
@@ -217,12 +212,12 @@ const RadialIcons = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-blue-200 via-blue-50 to-blue-200">
+    <div className="bg-gradient-to-r from-blue-200 via-blue-50 to-blue-200 pb-16 sm:pb-20">
       <WordPullUp
         words="Alumni Testimonials"
         className="text-4xl block md:hidden md:text-5xl font-bold tracking-tight text-mainBlue text-center sm:text-left pt-12 mb-0"
       />
-      <Card 
+      <Card
         className="grid grid-cols-1 md:grid-cols-5 gap-0 md:gap-6 max-w-screen-xl mx-auto p-6 md:p-8 border-none shadow-none items-center min-h-screen pb-20 md:min-h-[90vh] bg-inherit"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -293,9 +288,9 @@ const RadialIcons = () => {
             words="Alumni Testimonials"
             className="text-4xl hidden md:block md:text-5xl font-bold tracking-tight text-mainBlue sm:text-left mt-8 mb-0 md:mb-6 pl-6"
           />
-          <div 
+          <div
             className={`p-0 pb-6 sm:p-6 rounded-md flex-grow w-full max-w-full sm:max-w-2xl mx-auto md:mx-0 transition-opacity duration-500 ${
-              isAnimating ? 'opacity-0' : 'opacity-100'
+              isAnimating ? "opacity-0" : "opacity-100"
             }`}
           >
             <div className="flex justify-center md:justify-start items-center mb-4">
@@ -325,7 +320,7 @@ const RadialIcons = () => {
               />
             </div>
           </div>
-          <div className="absolute bottom-[-2rem] md:bottom-4 md:right-4 justify-center md:justify-end w-full flex gap-4">
+          <div className="absolute !-bottom-8 md:!-bottom-4 md:left-12 justify-center md:justify-start w-full flex gap-4">
             <Button
               size="icon"
               onClick={handlePrevious}
@@ -341,8 +336,49 @@ const RadialIcons = () => {
               <ArrowRight className="h-6 w-6" />
             </Button>
           </div>
+          <Link
+            to="/alumni"
+            className="hidden lg:flex absolute !-bottom-8 md:!-bottom-0 md:right-12 justify-center md:justify-end w-full gap-4"
+            onClick={() => {
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
+            }}
+          >
+            <Button
+              className="group gap-0 px-0 py-0 h-0 rounded-none"
+              size="lg"
+            >
+              <div className="bg-red-600 h-11 flex items-center pl-8 pr-4 hover:bg-red-700">
+                View All Alumni
+              </div>
+              <div className="bg-mainBlue h-11 flex items-center px-4">
+                <ArrowRight className="w-4 bg-mainBlue h-4 transition-transform group-hover:translate-x-1" />
+              </div>
+            </Button>
+          </Link>
         </CardContent>
       </Card>
+      <Link
+        to="/alumni"
+        className="flex lg:hidden justify-center"
+        onClick={() => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        }}
+      >
+        <Button className="group gap-0 px-0 py-0 h-0 rounded-none" size="lg">
+          <div className="bg-red-600 h-11 flex items-center pl-8 pr-4 hover:bg-red-700">
+            View All Alumni
+          </div>
+          <div className="bg-mainBlue h-11 flex items-center px-4">
+            <ArrowRight className="w-4 bg-mainBlue h-4 transition-transform group-hover:translate-x-1" />
+          </div>
+        </Button>
+      </Link>
     </div>
   );
 };
