@@ -82,8 +82,8 @@ export default function HomePage() {
   return (
     <>
       <SEO
-        title="Home"
-        description="Siva Sivani Institute of Management (SSIM) is a premier business school in Hyderabad, India, offering PGDM programs. Explore our courses, admissions, and campus life."
+        title="Siva Sivani Institute of Management - Top and Best Bschools in Hyderabad, South India, India"
+        description="Siva Sivani Institute of Management (SSIM) is an integral part of the Siva Sivani Group that has a legacy of over six decades in imparting quality education. Top Best Bschools in Hyderabad, South India, India"
         keywords="SSIM, Siva Sivani Institute of Management, PGDM, Best B-School Hyderabad, Management College"
         canonicalUrl="https://www.ssim.ac.in/"
       />
