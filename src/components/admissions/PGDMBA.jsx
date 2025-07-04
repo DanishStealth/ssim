@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import SEO from "@/components/Seo";
 import { Button } from "../ui/button";
 import {
   Card,
@@ -738,152 +739,162 @@ const PGDMBA = () => {
   const [activeSection, setActiveSection] = useState("overview");
   const [isEnquireOpen, setIsEnquireOpen] = useState(false);
 
+  const renderSection = () => {
+    switch (activeSection) {
+      case "overview":
+        return <Overview />;
+      case "programs":
+        return <ProgramsOffered />;
+      case "process":
+        return <Process />;
+      case "eligibility":
+        return <EligibilityCriteria />;
+      case "fees":
+        return <Fees />;
+      case "dates":
+        return <Dates />;
+      case "brochure":
+        return (
+          <Brochure setIsEnquireOpen={setIsEnquireOpen} />
+        );
+      case "apply":
+        return <Apply />;
+      case "scholarships":
+        return <Scholarships />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* Hero Section */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-primary/10 via-white to-white border-b">
-        <div className="container max-w-7xl mx-auto px-4 py-16 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-2xl"
-          >
-            <h1 className="text-4xl sm:text-5xl font-bold mb-4 pb-4 bg-gradient-to-r from-red-600 to-red-600/60 bg-clip-text text-transparent">
-              Begin Your Journey with PGDM-BA Program
-            </h1>
-            <p className="text-xl text-gray-900">
-              Take the first step towards your future with our world-class
-              education programs.
-            </p>
-          </motion.div>
+    <>
+      <SEO
+        title="PGDM Business Analytics"
+        description="Discover the PGDM in Business Analytics (BA) at Siva Sivani Institute of Management (SSIM). Explore the curriculum, eligibility, and career opportunities in the field of data analytics."
+        keywords="PGDM Business Analytics, PGDM BA, data analytics courses, business intelligence, SSIM PGDM"
+        canonicalUrl="https://www.ssim.ac.in/admissions/pgdm-ba"
+      />
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+        {/* Hero Section */}
+        <div className="relative overflow-hidden bg-gradient-to-r from-primary/10 via-white to-white border-b">
+          <div className="container max-w-7xl mx-auto px-4 py-16 relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="max-w-2xl"
+            >
+              <h1 className="text-4xl sm:text-5xl font-bold mb-4 pb-4 bg-gradient-to-r from-red-600 to-red-600/60 bg-clip-text text-transparent">
+                Begin Your Journey with PGDM-BA Program
+              </h1>
+              <p className="text-xl text-gray-900">
+                Take the first step towards your future with our world-class
+                education programs.
+              </p>
+            </motion.div>
+          </div>
+          {/* Background image - only on large devices */}
+          <div
+            className="absolute inset-0 z-0 bg-contain bg-no-repeat bg-right hidden lg:block"
+            style={{ backgroundImage: `url(${PGDMBABanner})` }}
+          />
+
+          {/* Gradient and icon - only on smaller devices */}
+          <div className="absolute inset-0 z-0 block lg:hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-primary/10 backdrop-blur-3xl" />
+            <GraduationCap className="absolute right-10 top-10 w-96 h-96 text-primary/5 rotate-12" />
+          </div>
         </div>
-        {/* Background image - only on large devices */}
-        <div
-          className="absolute inset-0 z-0 bg-contain bg-no-repeat bg-right hidden lg:block"
-          style={{ backgroundImage: `url(${PGDMBABanner})` }}
-        />
 
-        {/* Gradient and icon - only on smaller devices */}
-        <div className="absolute inset-0 z-0 block lg:hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-primary/10 backdrop-blur-3xl" />
-          <GraduationCap className="absolute right-10 top-10 w-96 h-96 text-primary/5 rotate-12" />
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="container max-w-7xl mx-auto px-4 py-8">
-        <div className="lg:grid lg:grid-cols-[280px_1fr] gap-8">
-          {/* Desktop Sidebar */}
-          <aside className="hidden lg:block sticky top-8 h-fit">
-            <Card>
-              <CardHeader>
-                <CardTitle>Admissions Guide</CardTitle>
-                <CardDescription>
-                  Explore our admissions process
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <NavContent
-                  activeSection={activeSection}
-                  setActiveSection={setActiveSection}
-                  sections={navigationSections}
-                />
-              </CardContent>
-            </Card>
-          </aside>
-
-          {/* Mobile Navigation */}
-          <div className="lg:hidden mb-6">
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button
-                  variant="outline"
-                  className="w-full flex items-center gap-2"
-                >
-                  <Menu className="w-4 h-4" />
-                  <span>Navigation Menu</span>
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left">
-                <div className="py-4">
+        {/* Main Content */}
+        <div className="container max-w-7xl mx-auto px-4 py-8">
+          <div className="lg:grid lg:grid-cols-[280px_1fr] gap-8">
+            {/* Desktop Sidebar */}
+            <aside className="hidden lg:block sticky top-8 h-fit">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Admissions Guide</CardTitle>
+                  <CardDescription>
+                    Explore our admissions process
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
                   <NavContent
                     activeSection={activeSection}
                     setActiveSection={setActiveSection}
                     sections={navigationSections}
                   />
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div>
+                </CardContent>
+              </Card>
+            </aside>
 
-          {/* Content Area */}
-          <main>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeSection}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="space-y-6"
-              >
-                {/* Section Title */}
-                <div className="flex items-center gap-3 mb-6">
-                  {navigationSections.find((s) => s.id === activeSection)
-                    ?.icon &&
-                    React.createElement(
-                      navigationSections.find((s) => s.id === activeSection)
-                        ?.icon,
-                      { className: "w-8 h-8 text-red-600" }
-                    )}
-                  <h2 className="text-3xl text-mainBlue font-bold">
-                    {
-                      navigationSections.find((s) => s.id === activeSection)
-                        ?.label
-                    }
-                  </h2>
-                </div>
+            {/* Mobile Navigation */}
+            <div className="lg:hidden mb-6">
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="w-full flex items-center gap-2"
+                  >
+                    <Menu className="w-4 h-4" />
+                    <span>Navigation Menu</span>
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="left">
+                  <div className="py-4">
+                    <NavContent
+                      activeSection={activeSection}
+                      setActiveSection={setActiveSection}
+                      sections={navigationSections}
+                    />
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
 
-                {/* Section Content */}
-                <Card className="border">
-                  <CardContent className="p-6">
-                    {(() => {
-                      switch (activeSection) {
-                        case "overview":
-                          return <Overview />;
-                        case "programs":
-                          return <ProgramsOffered />;
-                        case "process":
-                          return <Process />;
-                        case "eligibility":
-                          return <EligibilityCriteria />;
-                        case "fees":
-                          return <Fees />;
-                        case "dates":
-                          return <Dates />;
-                        case "brochure":
-                          return (
-                            <Brochure setIsEnquireOpen={setIsEnquireOpen} />
-                          );
-                        case "apply":
-                          return <Apply />;
-                        case "scholarships":
-                          return <Scholarships />;
-                        default:
-                          return null;
+            {/* Content Area */}
+            <main>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeSection}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="space-y-6"
+                >
+                  {/* Section Title */}
+                  <div className="flex items-center gap-3 mb-6">
+                    {navigationSections.find((s) => s.id === activeSection)
+                      ?.icon &&
+                      React.createElement(
+                        navigationSections.find((s) => s.id === activeSection)
+                          ?.icon,
+                        { className: "w-8 h-8 text-red-600" }
+                      )}
+                    <h2 className="text-3xl text-mainBlue font-bold">
+                      {
+                        navigationSections.find((s) => s.id === activeSection)
+                          ?.label
                       }
-                    })()}
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </AnimatePresence>
-          </main>
-        </div>
-      </div>
+                    </h2>
+                  </div>
 
-      {/* Enquire Dialog */}
-      <EnquireDialog isOpen={isEnquireOpen} setIsOpen={setIsEnquireOpen} />
-    </div>
+                  {/* Section Content */}
+                  <Card className="border">
+                    <CardContent className="p-6">
+                      {renderSection()}
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </AnimatePresence>
+            </main>
+          </div>
+        </div>
+
+        {/* Enquire Dialog */}
+        <EnquireDialog isOpen={isEnquireOpen} setIsOpen={setIsEnquireOpen} />
+      </div>
+    </>
   );
 };
 

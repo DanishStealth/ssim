@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SEO from "@/components/Seo";
 import Ramana from "../../assets/about/academic-advisory-board/Dr. Ramana Rao.webp";
 import Ambuj from "../../assets/about/academic-advisory-board/dr-ambuj.jpeg";
 import ArathySampathy from "../../assets/about/academic-advisory-board/Smt_Arathy_Sampathy.jpg";
@@ -208,47 +209,55 @@ export default function AcademicAdvisoryBoard() {
   ];
 
   return (
-    <div className="w-full px-5 sm:px-6 py-16 bg-white">
-      <div className="max-w-7xl mx-auto">
-        {/* Header Section */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-            Academic Advisory Board
-          </h2>
-          <p className="text-gray-500 max-w-3xl mx-auto">
-            The Vice President & Dy. Chief Executive is pleased to re-constitute
-            the Academic Advisory Board (AAB) to review, restructure and guide
-            the conduct of the various academic courses of the Programmes on
-            offer with the following as its members:
-          </p>
-        </div>
+    <>
+      <SEO
+        title="Academic Advisory Board"
+        description="Meet the esteemed members of the Academic Advisory Board at Siva Sivani Institute of Management (SSIM). Our board comprises distinguished leaders from academia and industry."
+        keywords="SSIM academic advisory board, advisory board, academic leadership, business school governance"
+        canonicalUrl="https://www.ssim.ac.in/about/academic-advisory-board"
+      />
+      <div className="w-full px-5 sm:px-6 py-16 bg-white">
+        <div className="max-w-7xl mx-auto">
+          {/* Header Section */}
+          <div className="text-center mb-16">
+            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+              Academic Advisory Board
+            </h2>
+            <p className="text-gray-500 max-w-3xl mx-auto">
+              The Vice President & Dy. Chief Executive is pleased to re-constitute
+              the Academic Advisory Board (AAB) to review, restructure and guide
+              the conduct of the various academic courses of the Programmes on
+              offer with the following as its members:
+            </p>
+          </div>
 
-        {/* Team Members Grid */}
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
-          {teamMembers.map((member, index) => (
-            <div
-              key={index}
-              className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-6 sm:p-6 bg-white rounded-lg"
-            >
-              <div className="max-w-[200px] flex-shrink-0">
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-full h-full aspect-[74/85] object-cover rounded-lg"
-                />
+          {/* Team Members Grid */}
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            {teamMembers.map((member, index) => (
+              <div
+                key={index}
+                className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-6 sm:p-6 bg-white rounded-lg"
+              >
+                <div className="max-w-[200px] flex-shrink-0">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full aspect-[74/85] object-cover rounded-lg"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <h3 className="text-xl sm:text-3xl font-semibold text-gray-900">
+                    {member.name}
+                  </h3>
+                  <hr className="w-[180px] sm:w-full mx-auto border-gray-200 border-[1.5px] my-4" />
+                  <span className="text-blue-600 mb-4">{member.role}</span>
+                  <p className="text-gray-500">{member.bio}</p>
+                </div>
               </div>
-              <div className="flex flex-col">
-                <h3 className="text-xl sm:text-3xl font-semibold text-gray-900">
-                  {member.name}
-                </h3>
-                <hr className="w-[180px] sm:w-full mx-auto border-gray-200 border-[1.5px] my-4" />
-                <span className="text-blue-600 mb-4">{member.role}</span>
-                <p className="text-gray-500">{member.bio}</p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

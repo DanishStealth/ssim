@@ -1,7 +1,7 @@
 "use client";
 
 import { Calendar } from "../ui/calendar";
-
+import SEO from "@/components/Seo";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -2418,37 +2418,54 @@ const CourseElectives = ({ electives, programId }) => {
 
 const ProgramSection = ({ programId, activeSection }) => {
   const program = programData[programId];
+  if (!program) return <div>Program not found</div>;
+
+  const seoTitle = `${program.name} | SSIM`;
+  const seoDescription = `Learn about the ${program.name} program at Siva Sivani Institute of Management. Explore the curriculum, specializations, and career opportunities.`;
+  const seoKeywords = `SSIM ${program.name}, ${program.name} program, ${program.name} curriculum, ${program.name} admissions`;
+  const canonicalUrl = `https://www.ssim.ac.in/programs/${programId}`;
+
+  const renderContent = () => {
+    switch (activeSection) {
+      case "about":
+        return <KeyInformation info={program.keyInfo} />;
+      case "electives":
+        return <CourseElectives electives={program.electives} programId={programId} />;
+      case "specializations":
+        return <Specializations specializations={program.specializations} />;
+      case "managerialCompetency":
+        return <ManagerialCompetency managerialCompetency={program.managerialCompetency} />;
+      case "differentiators":
+        return <Differentiators differentiators={program.differentiators} />;
+      case "curriculum":
+        return <Curriculum curriculum={program.curriculum} />;
+      case "eligibility":
+        return <EligibilityAdmission eligibility={program.eligibility} admission={program.admission} />;
+      default:
+        return <div>Select a section</div>;
+    }
+  };
 
   return (
-    <div>
-      <h2 className="text-3xl font-bold mb-6 text-mainBlue">
-        {program.name} Program
-      </h2>
-      {activeSection === "about" && <KeyInformation info={program.keyInfo} />}
-      {activeSection === "specializations" && (
-        <Specializations specializations={program?.specializations} />
-      )}
-      {activeSection === "managerialCompetency" && (
-        <ManagerialCompetency
-          managerialCompetency={program.managerialCompetency}
-        />
-      )}
-      {activeSection === "differentiators" && (
-        <Differentiators differentiators={program.differentiators} />
-      )}
-      {activeSection === "curriculum" && (
-        <Curriculum curriculum={program.curriculum} />
-      )}
-      {activeSection === "electives" && (
-        <CourseElectives electives={program.electives} programId={programId} />
-      )}
-      {activeSection === "eligibility" && (
-        <EligibilityAdmission
-          eligibility={program.eligibility}
-          admission={program.admission}
-        />
-      )}
-    </div>
+    <>
+      <SEO
+        title={seoTitle}
+        description={seoDescription}
+        keywords={seoKeywords}
+        canonicalUrl={canonicalUrl}
+      />
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeSection}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.3 }}
+        >
+          {renderContent()}
+        </motion.div>
+      </AnimatePresence>
+    </>
   );
 };
 

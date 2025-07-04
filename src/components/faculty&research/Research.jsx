@@ -30,6 +30,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { useMediaQuery } from "@/hooks/research";
+import SEO from "@/components/Seo";
 
 const BannerSection = ({ className, ...props }) => {
   return (
@@ -371,9 +372,17 @@ function EnhancedFeaturesCarousel() {
 const Research = () => {
   return (
     <>
-      <BannerSection />
-      <ResearchSection />
-      <EnhancedFeaturesCarousel />
+      <SEO
+        title="Research at SSIM"
+        description="Discover the research initiatives, centers of excellence, and funded projects at Siva Sivani Institute of Management (SSIM). We are committed to advancing knowledge and innovation."
+        keywords="SSIM research, research at SSIM, business school research, management research, funded projects"
+        canonicalUrl="https://www.ssim.ac.in/research/case-research-center"
+      />
+      <div className="bg-gray-50/50">
+        <BannerSection />
+        <ResearchSection />
+        <EnhancedFeaturesCarousel />
+      </div>
     </>
   );
 };

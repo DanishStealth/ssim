@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useMediaQuery } from "@/hooks/research";
-//import Testimonial from "@/components/Testimonial";
+import Testimonial from "@/components/Testimonial";
 import LatestBlogsAndEvents from "@/components/LatestBlogs&Events";
 import Carousel from "@/components/Carousel";
 import AboutSection from "@/components/AboutSection";
@@ -12,9 +12,7 @@ import HeroSlider from "@/components/HeroSlider";
 import LiveProjects from "@/components/LiveProjects";
 import RadialIcons from "@/components/RadialIcons";
 import UpcomingEvents from "@/components/UpcomingEvents";
-//import AwardsSection from "@/components/AwardsSection";
-// import AnimatedBeamShowcase from "@/components/animated-beam-showcase";
-import Events from "@/components/Events";
+import SEO from "@/components/Seo";
 import { Fragment, useEffect } from "react";
 // import Page from "@/components/page"
 
@@ -83,20 +81,26 @@ export default function HomePage() {
 
   return (
     <>
-      <div>
+      <SEO
+        title="Home"
+        description="Siva Sivani Institute of Management (SSIM) is a premier business school in Hyderabad, India, offering PGDM programs. Explore our courses, admissions, and campus life."
+        keywords="SSIM, Siva Sivani Institute of Management, PGDM, Best B-School Hyderabad, Management College"
+        canonicalUrl="https://www.ssim.ac.in/"
+      />
+      <div className="bg-gray-50 text-gray-800">
         {[
           <HeroSlider key="hero-slider" />,
+          <ImmLegacySection key="imm-legacy-section" />,
           <AboutSection key="about-section" />,
           <AcademicPrograms key="academic-programs" />,
-          // <ImmLegacySection key="imm-legacy-section" />,
           <Carousel key="carousel" />,
           <LatestBlogsAndEvents key="latest-blogs-and-events" />,
-          <RadialIcons key="testimonial" />,
-          // <Events key="events" />,
-          // <UpcomingEvents key="upcoming-events" />,
+          <RadialIcons key="radial-icons" />,
           <LiveProjects key="live-projects" />,
-        ].map((Section, index) => (
-          <SectionWrapper key={index}>{Section}</SectionWrapper>
+          <UpcomingEvents key="upcoming-events" />,
+          <Testimonial key="testimonial" />,
+        ].map((component) => (
+          <SectionWrapper key={component.key}>{component}</SectionWrapper>
         ))}
       </div>
     </>

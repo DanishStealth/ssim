@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import SEO from "@/components/Seo";
 import { Card, CardContent } from "../ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
@@ -56,6 +57,12 @@ FeaturedItem.propTypes = {
 export default function PlacementTeams() {
   return (
     <>
+      <SEO
+        title="Placement Team"
+        description="Meet the dedicated placement team at Siva Sivani Institute of Management (SSIM). Our team works tirelessly to connect students with top companies and secure excellent career opportunities."
+        keywords="SSIM placement team, corporate relations, career services, placement officers"
+        canonicalUrl="https://www.ssim.ac.in/placement/team"
+      />
       <section className="py-10 md:py-20 bg-gradient-to-r from-blue-200 via-blue-50 to-blue-200 dark:bg-[#0b1727] text-black dark:text-white relative overflow-hidden z-10">
         <div className="container max-w-7xl px-4 mx-auto">
           <div className="grid grid-cols-2 gap-6 items-start">

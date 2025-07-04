@@ -10,6 +10,7 @@ import {
 } from "../ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
+import SEO from "@/components/Seo";
 
 import {
   BookOpen,
@@ -630,149 +631,116 @@ const OnlineRegistration = () => (
 );
 
 const Conferences = () => {
-  const [activeSection, setActiveSection] = useState("about-ssim");
+  const [activeSection, setActiveSection] = useState("about-conference");
   const [isEnquireOpen, setIsEnquireOpen] = useState(false);
 
+  const renderSection = () => {
+    switch (activeSection) {
+      case "about-ssim":
+        return <AboutSsim />;
+      case "about-conference":
+        return <AboutConference />;
+      case "themes-for-samaroh":
+        return <ThemesForSamaroh />;
+      case "conference-note":
+        return <ConferenceNote />;
+      case "publishing-opportunities":
+        return (
+          <PublishingOpportunities setIsEnquireOpen={setIsEnquireOpen} />
+        );
+      case "online-registration":
+        return <OnlineRegistration />;
+      default:
+        return <AboutConference />;
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-10 sm:py-16">
-      {/* Hero Section */}
-      {/* <div className="relative overflow-hidden bg-gradient-to-r from-primary/10 via-primary/5 to-background border-b">
-        <div className="container max-w-7xl mx-auto px-4 py-16 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="max-w-2xl"
-          >
-            <h1 className="text-5xl font-bold mb-4 pb-4 bg-gradient-to-r from-red-600 to-red-600/60 bg-clip-text text-transparent">
-              Begin Your Journey with FPM Program
-            </h1>
-            <p className="text-xl text-gray-900">
-              Take the first step towards your future with our world-class
-              education programs.
-            </p>
-          </motion.div>
-        </div>
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-primary/10 backdrop-blur-3xl" />
-          <GraduationCap className="absolute right-10 top-10 w-96 h-96 text-primary/5 rotate-12" />
-        </div>
-      </div> */}
-
-      {/* Main Content */}
-      <div className="container max-w-7xl mx-auto px-4 py-8 sm:pb-20">
-        <Heading
-          title="SAMAROH 2025 - International Conference on Industry 5.0 - Business with Purpose"
-          className="text-red-600 sm:!text-4xl"
-        />
-        <div className="lg:grid lg:grid-cols-[350px_1fr] gap-8">
-          {/* Desktop Sidebar */}
-          <aside className="hidden lg:block sticky top-8 h-fit">
-            <Card>
-              <CardHeader>
-                <CardTitle>Admissions Guide</CardTitle>
-                <CardDescription>
-                  Explore our admissions process
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <NavContent
-                  activeSection={activeSection}
-                  setActiveSection={setActiveSection}
-                  sections={navigationSections}
-                />
-              </CardContent>
-            </Card>
-          </aside>
-
-          {/* Mobile Navigation */}
-          <div className="lg:hidden mb-6">
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button
-                  variant="outline"
-                  className="w-full flex items-center gap-2"
-                >
-                  <Menu className="w-4 h-4" />
-                  <span>Navigation Menu</span>
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left">
-                <div className="py-4">
+    <>
+      <SEO
+        title="Conferences at SSIM"
+        description="Stay updated on the latest conferences, seminars, and academic events at Siva Sivani Institute of Management (SSIM). Join us for insightful discussions and networking opportunities."
+        keywords="SSIM conferences, business conferences, academic seminars, management events, research conferences"
+        canonicalUrl="https://www.ssim.ac.in/research/conferences"
+      />
+      <div className="w-full relative bg-gray-50/50">
+        <Banner />
+        <main className="container mx-auto px-4 py-8 relative -mt-32 z-10">
+          <Heading
+            title="SAMAROH 2025 - International Conference on Industry 5.0 - Business with Purpose"
+            className="text-red-600 sm:!text-4xl"
+          />
+          <div className="lg:grid lg:grid-cols-[350px_1fr] gap-8">
+            <aside className="hidden lg:block sticky top-8 h-fit">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Conference Sections</CardTitle>
+                </CardHeader>
+                <CardContent>
                   <NavContent
                     activeSection={activeSection}
                     setActiveSection={setActiveSection}
                     sections={navigationSections}
                   />
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div>
+                </CardContent>
+              </Card>
+            </aside>
 
-          {/* Content Area */}
-          <main>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeSection}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="space-y-6"
-              >
-                {/* Section Title */}
-                <div className="flex items-center gap-3 mb-6">
-                  {navigationSections.find((s) => s.id === activeSection)
-                    ?.icon &&
-                    React.createElement(
-                      navigationSections.find((s) => s.id === activeSection)
-                        ?.icon,
-                      { className: "w-8 h-8 text-red-600" }
-                    )}
-                  <h2 className="text-3xl text-mainBlue font-bold">
-                    {
-                      navigationSections.find((s) => s.id === activeSection)
-                        ?.label
-                    }
-                  </h2>
-                </div>
+            <div className="lg:hidden mb-6">
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="outline" className="w-full">
+                    <Menu className="mr-2 h-4 w-4" />
+                    Conference Menu
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="left">
+                  <NavContent
+                    activeSection={activeSection}
+                    setActiveSection={setActiveSection}
+                    sections={navigationSections}
+                  />
+                </SheetContent>
+              </Sheet>
+            </div>
 
-                {/* Section Content */}
-                <Card className="border">
-                  <CardContent className="p-6">
-                    {(() => {
-                      switch (activeSection) {
-                        case "about-ssim":
-                          return <AboutSsim />;
-                        case "about-conference":
-                          return <AboutConference />;
-                        case "themes-for-samaroh":
-                          return <ThemesForSamaroh />;
-                        case "conference-note":
-                          return <ConferenceNote />;
-                        case "publishing-opportunities":
-                          return (
-                            <PublishingOpportunities
-                              setIsEnquireOpen={setIsEnquireOpen}
-                            />
-                          );
-                        case "online-registration":
-                          return <OnlineRegistration />;
-                        // case "scholarships":
-                        //   return <Scholarships />;
-                        default:
-                          return null;
+            <main>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeSection}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="space-y-6"
+                >
+                  <div className="flex items-center gap-3 mb-6">
+                    {navigationSections.find((s) => s.id === activeSection)
+                      ?.icon &&
+                      React.createElement(
+                        navigationSections.find((s) => s.id === activeSection)
+                          .icon,
+                        { className: "w-6 h-6 text-mainBlue" }
+                      )}
+                    <h2 className="text-2xl font-bold text-gray-800">
+                      {
+                        navigationSections.find((s) => s.id === activeSection)
+                          ?.label
                       }
-                    })()}
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </AnimatePresence>
-          </main>
-        </div>
+                    </h2>
+                  </div>
+                  <Card className="border">
+                    <CardContent className="p-6">{renderSection()}</CardContent>
+                  </Card>
+                </motion.div>
+              </AnimatePresence>
+            </main>
+          </div>
+        </main>
       </div>
       <TeamSection />
       <Tourists />
-    </div>
+    </>
   );
 };
 
@@ -839,10 +807,8 @@ const TeamSection = () => {
     },
   ];
 
-  // For expanded bio state
   const [expandedId, setExpandedId] = useState(null);
 
-  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -892,7 +858,6 @@ const TeamSection = () => {
     setExpandedId(expandedId === id ? null : id);
   };
 
-  // Function to get initials from name
   const getInitials = (name) => {
     return name
       .split(" ")
@@ -901,7 +866,6 @@ const TeamSection = () => {
       .toUpperCase();
   };
 
-  // Function to generate a consistent color based on name
   const getAvatarColor = (name) => {
     const colors = [
       "border border-blue-500",
@@ -915,7 +879,6 @@ const TeamSection = () => {
       "border border-fuchsia-500",
     ];
 
-    // Simple hash function to get a consistent index
     const hash = name
       .split("")
       .reduce((acc, char) => acc + char.charCodeAt(0), 0);
@@ -925,7 +888,6 @@ const TeamSection = () => {
   return (
     <section className="w-full py-16 md:py-20 bg-gradient-to-r from-blue-200 via-blue-50 to-blue-200 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6 relative">
-        {/* Background decorative elements */}
         <div className="absolute top-0 left-0 w-32 h-32 bg-blue-100 rounded-full opacity-30 blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-0 w-64 h-64 bg-purple-100 rounded-full opacity-30 blur-3xl translate-x-1/3 translate-y-1/3"></div>
 
@@ -1000,25 +962,6 @@ const TeamSection = () => {
                       >
                         {member.bio}
                       </motion.p>
-
-                      {/* {member.bio.length > 80 && (
-                        <motion.button
-                          onClick={() => toggleBio(member.id)}
-                          className="mt-1 text-xs font-medium text-blue-600 hover:text-blue-800 flex items-center"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          {expandedId === member.id ? (
-                            <>
-                              Show less <ChevronUp className="h-3 w-3 ml-1" />
-                            </>
-                          ) : (
-                            <>
-                              Read more <ChevronDown className="h-3 w-3 ml-1" />
-                            </>
-                          )}
-                        </motion.button>
-                      )} */}
                     </div>
                   </div>
                 </div>
@@ -1154,20 +1097,6 @@ const TeamSection = () => {
                   </div>
 
                   <div className="flex-grow">
-                    {/* <div className="relative mb-4">
-                      <motion.p
-                        className={cn(
-                          "text-slate-600 text-sm leading-relaxed",
-                          expandedId === member.id ? "" : "line-clamp-2"
-                        )}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.3 }}
-                      >
-                        {member.bio}
-                      </motion.p>
-                    </div> */}
-
                     <motion.div
                       className="space-y-2 pt-2 border-t border-slate-100"
                       variants={contactVariants}
@@ -1257,24 +1186,6 @@ function Tourists() {
   return (
     <section className="w-full pt-4 !py-16">
       <div className="container mx-auto px-4 md:px-6">
-        {/* <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-col items-center justify-center space-y-4 text-center mb-16"
-        >
-          <Badge variant="outline" className="border-blue-500 text-blue-600">
-            Our Amazing Team
-          </Badge>
-          <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl text-gray-900">
-            Meet the Innovators
-          </h2>
-          <p className="max-w-[900px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            Passionate individuals working together to create extraordinary
-            experiences
-          </p>
-        </motion.div> */}
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
           {team.map((member, index) => (
             <motion.div

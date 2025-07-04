@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import SEO from "@/components/Seo";
 import {
   LinkedinIcon,
   InstagramIcon,
@@ -358,94 +359,102 @@ export default function Areas() {
   const [hoveredMember, setHoveredMember] = useState(null);
 
   return (
-    <section className="w-full py-16">
-      <div className="container px-4 md:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-col items-center justify-center space-y-4 text-center mb-16"
-        >
-          {/* <Badge variant="outline" className="border-blue-500 text-blue-600">
-            Our Amazing Team
-          </Badge> */}
-          <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl text-gray-900">
-            Faculty Areas of Expertise
-          </h2>
-          <p className="max-w-[900px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            Meet our distinguished faculty members and their specialized domains of knowledge and research
-          </p>
-        </motion.div>
+    <>
+      <SEO
+        title="Faculty Areas of Expertise"
+        description="Explore the diverse areas of expertise of our distinguished faculty at Siva Sivani Institute of Management (SSIM). Meet our experts in Finance, HR, Marketing, and more."
+        keywords="SSIM faculty, faculty expertise, business school professors, academic areas"
+        canonicalUrl="https://www.ssim.ac.in/faculty/areas"
+      />
+      <section className="w-full py-16">
+        <div className="container px-4 md:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col items-center justify-center space-y-4 text-center mb-16"
+          >
+            {/* <Badge variant="outline" className="border-blue-500 text-blue-600">
+              Our Amazing Team
+            </Badge> */}
+            <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl text-gray-900">
+              Faculty Areas of Expertise
+            </h2>
+            <p className="max-w-[900px] text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+              Meet our distinguished faculty members and their specialized domains of knowledge and research
+            </p>
+          </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-          {teamMembers.map((member, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <Card
-                className={`group relative overflow-hidden bg-white/50 border-gray-200 backdrop-blur-sm transition-all duration-500
-                  ${
-                    hoveredMember === index
-                      ? "scale-105 shadow-2xl shadow-blue-500/20"
-                      : "hover:shadow-xl"
-                  }`}
-                onMouseEnter={() => setHoveredMember(index)}
-                onMouseLeave={() => setHoveredMember(null)}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+            {teamMembers.map((member, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <CardContent className="p-8">
-                  <div className="flex flex-col md:flex-row items-center gap-8">
-                    <div className="relative">
-                      <div
-                        className="w-40 h-40 rounded-full overflow-hidden ring-2 ring-blue-500/50 ring-offset-4 ring-offset-white
-                        transition-all duration-500 group-hover:ring-blue-500 group-hover:ring-offset-8"
-                      >
-                        <img
-                          alt={member.name}
-                          src={member.image || "/placeholder.svg"}
-                          className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
-                        />
+                <Card
+                  className={`group relative overflow-hidden bg-white/50 border-gray-200 backdrop-blur-sm transition-all duration-500
+                    ${
+                      hoveredMember === index
+                        ? "scale-105 shadow-2xl shadow-blue-500/20"
+                        : "hover:shadow-xl"
+                    }`}
+                  onMouseEnter={() => setHoveredMember(index)}
+                  onMouseLeave={() => setHoveredMember(null)}
+                >
+                  <CardContent className="p-8">
+                    <div className="flex flex-col md:flex-row items-center gap-8">
+                      <div className="relative">
+                        <div
+                          className="w-40 h-40 rounded-full overflow-hidden ring-2 ring-blue-500/50 ring-offset-4 ring-offset-white
+                          transition-all duration-500 group-hover:ring-blue-500 group-hover:ring-offset-8"
+                        >
+                          <img
+                            alt={member.name}
+                            src={member.image || "/placeholder.svg"}
+                            className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+                          />
+                        </div>
+                        <div
+                          className="absolute -bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-1 text-sm text-gray-600 bg-white/90 
+                         whitespace-nowrap px-3 py-1 rounded-full border border-gray-200"
+                        >
+                          <SchoolIcon className="w-4 h-4" />
+                          <span>{member.qualification}</span>
+                        </div>
                       </div>
-                      <div
-                        className="absolute -bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-1 text-sm text-gray-600 bg-white/90 
-                       whitespace-nowrap px-3 py-1 rounded-full border border-gray-200"
-                      >
-                        <SchoolIcon className="w-4 h-4" />
-                        <span>{member.qualification}</span>
-                      </div>
-                    </div>
 
-                    <div className="flex-1 text-center md:text-left space-y-6">
-                      <div>
-                        <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-                          {member.name}
-                        </h3>
-                        <p className="text-blue-600 font-medium inline-flex items-center gap-2">
-                          {member.area}
-                          <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-                          <Badge
-                            className="flex items-center gap-1 text-sm text-gray-600 hover:bg-blue-100 bg-white/90 
-                       whitespace-nowrap px-3 pb-1 rounded-full border border-gray-200"
-                          >
-                            <GraduationCapIcon className="w-4 h-4 mr-2" />
-                            <span>{member.experience} years</span>
-                          </Badge>
+                      <div className="flex-1 text-center md:text-left space-y-6">
+                        <div>
+                          <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                            {member.name}
+                          </h3>
+                          <p className="text-blue-600 font-medium inline-flex items-center gap-2">
+                            {member.area}
+                            <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+                            <Badge
+                              className="flex items-center gap-1 text-sm text-gray-600 hover:bg-blue-100 bg-white/90 
+                             whitespace-nowrap px-3 pb-1 rounded-full border border-gray-200"
+                            >
+                              <GraduationCapIcon className="w-4 h-4 mr-2" />
+                              <span>{member.experience} years</span>
+                            </Badge>
+                          </p>
+                        </div>
+
+                        <p className="text-gray-600 text-sm leading-relaxed">
+                          {member.description}
                         </p>
                       </div>
-
-                      <p className="text-gray-600 text-sm leading-relaxed">
-                        {member.description}
-                      </p>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

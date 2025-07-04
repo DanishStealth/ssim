@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SEO from "@/components/Seo";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Dialog,
@@ -136,115 +137,123 @@ const NewsEvents = () => {
   };
 
   return (
-    <div className="bg-white py-10 lg:py-20">
-      <div className="mx-auto max-w-screen-xl px-4 md:px-8">
-        <div className="mb-10 md:mb-14">
-          <h2 className="mb-4 text-center font-bold text-gray-800 md:mb-6 text-3xl sm:text-5xl">
-            News & Announcements
-          </h2>
+    <>
+      <SEO
+        title="News & Announcements"
+        description="Stay updated with the latest news, events, and announcements from Siva Sivani Institute of Management (SSIM). Find out what's happening on campus."
+        keywords="SSIM news, SSIM events, college announcements, campus news, business school events"
+        canonicalUrl="https://www.ssim.ac.in/students-life/news-announcements"
+      />
+      <div className="bg-white py-10 lg:py-20">
+        <div className="mx-auto max-w-screen-xl px-4 md:px-8">
+          <div className="mb-10 md:mb-14">
+            <h2 className="mb-4 text-center font-bold text-gray-800 md:mb-6 text-3xl sm:text-5xl">
+              News & Announcements
+            </h2>
 
-          <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
-            This is a section of some simple filler text, also known as
-            placeholder text. It shares some characteristics of a real written
-            text but is random or otherwise generated.
-          </p>
-        </div>
-
-        <Tabs defaultValue="news" className="w-full">
-          <TabsList className="grid w-full h-full grid-cols-2 text-[#293794] bg-gradient-to-r from-blue-200 via-blue-50 to-blue-200">
-            <TabsTrigger
-              value="news"
-              className="text-lg font-semibold data-[state=active]:bg-mainBlue data-[state=active]:text-primary-foreground"
-            >
-              News
-            </TabsTrigger>
-            <TabsTrigger
-              value="announcements"
-              className="text-lg font-semibold data-[state=active]:bg-mainBlue data-[state=active]:text-primary-foreground"
-            >
-              Announcements
-            </TabsTrigger>
-          </TabsList>
-          <TabsContent value="news">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-4 mt-10 sm:mt-16">
-              {newsImages.map((image, index) => (
-                <div
-                  key={index}
-                  className="border border-gray-300 rounded-lg cursor-pointer"
-                  onClick={() => setSelectedImageIndex(index)}
-                >
-                  <img
-                    className="h-auto max-w-full rounded-lg aspect-[4/3] object-cover"
-                    src={image.src}
-                    alt={image.alt}
-                  />
-                </div>
-              ))}
-            </div>
-          </TabsContent>
-          <TabsContent value="announcements">
-            <div className="grid gap-8 sm:grid-cols-2 sm:gap-12 lg:grid-cols-2 xl:grid-cols-2 xl:gap-16 mt-10 sm:mt-16">
-              {announcements.map((item, index) => (
-                <AnnouncementCard key={index} {...item} />
-              ))}
-            </div>
-          </TabsContent>
-        </Tabs>
-      </div>
-
-      <Dialog
-        open={selectedImageIndex !== null}
-        onOpenChange={() => setSelectedImageIndex(null)}
-      >
-        <DialogContent className="max-w-screen h-screen p-0 bg-transparent border-0">
-          <div className="flex justify-center items-center overflow-hidden rounded-xl relative">
-            <img
-              src={newsImages[selectedImageIndex]?.src}
-              alt={newsImages[selectedImageIndex]?.alt}
-              className="w-full h-[80vh] object-contain rounded-xl"
-            />
-            
-            {/* Image Counter */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-full text-sm font-medium">
-              {selectedImageIndex !== null ? `${selectedImageIndex + 1} / ${newsImages.length}` : ''}
-            </div>
-
-            {/* Navigation Buttons */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-red-600/10 hover:bg-red-600/30 border-none text-white"
-              onClick={handlePrevious}
-              aria-label="Previous image"
-            >
-              <ChevronLeft className="h-8 w-8" />
-            </Button>
-
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-red-600/10 hover:bg-red-600/30 border-none text-white"
-              onClick={handleNext}
-              aria-label="Next image"
-            >
-              <ChevronRight className="h-8 w-8" />
-            </Button>
+            <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
+              This is a section of some simple filler text, also known as
+              placeholder text. It shares some characteristics of a real written
+              text but is random or otherwise generated.
+            </p>
           </div>
 
-          {/* Close Button */}
-          <DialogClose asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute right-1 top-1 rounded-full bg-white/10 hover:bg-white/30 border-none text-white z-10"
-              aria-label="Close dialog"
-            >
-              <X className="h-5 w-5" />
-            </Button>
-          </DialogClose>
-        </DialogContent>
-      </Dialog>
-    </div>
+          <Tabs defaultValue="news" className="w-full">
+            <TabsList className="grid w-full h-full grid-cols-2 text-[#293794] bg-gradient-to-r from-blue-200 via-blue-50 to-blue-200">
+              <TabsTrigger
+                value="news"
+                className="text-lg font-semibold data-[state=active]:bg-mainBlue data-[state=active]:text-primary-foreground"
+              >
+                News
+              </TabsTrigger>
+              <TabsTrigger
+                value="announcements"
+                className="text-lg font-semibold data-[state=active]:bg-mainBlue data-[state=active]:text-primary-foreground"
+              >
+                Announcements
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="news">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-4 mt-10 sm:mt-16">
+                {newsImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className="border border-gray-300 rounded-lg cursor-pointer"
+                    onClick={() => setSelectedImageIndex(index)}
+                  >
+                    <img
+                      className="h-auto max-w-full rounded-lg aspect-[4/3] object-cover"
+                      src={image.src}
+                      alt={image.alt}
+                    />
+                  </div>
+                ))}
+              </div>
+            </TabsContent>
+            <TabsContent value="announcements">
+              <div className="grid gap-8 sm:grid-cols-2 sm:gap-12 lg:grid-cols-2 xl:grid-cols-2 xl:gap-16 mt-10 sm:mt-16">
+                {announcements.map((item, index) => (
+                  <AnnouncementCard key={index} {...item} />
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
+        </div>
+
+        <Dialog
+          open={selectedImageIndex !== null}
+          onOpenChange={() => setSelectedImageIndex(null)}
+        >
+          <DialogContent className="max-w-screen h-screen p-0 bg-transparent border-0">
+            <div className="flex justify-center items-center overflow-hidden rounded-xl relative">
+              <img
+                src={newsImages[selectedImageIndex]?.src}
+                alt={newsImages[selectedImageIndex]?.alt}
+                className="w-full h-[80vh] object-contain rounded-xl"
+              />
+              
+              {/* Image Counter */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-full text-sm font-medium">
+                {selectedImageIndex !== null ? `${selectedImageIndex + 1} / ${newsImages.length}` : ''}
+              </div>
+
+              {/* Navigation Buttons */}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-red-600/10 hover:bg-red-600/30 border-none text-white"
+                onClick={handlePrevious}
+                aria-label="Previous image"
+              >
+                <ChevronLeft className="h-8 w-8" />
+              </Button>
+
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-red-600/10 hover:bg-red-600/30 border-none text-white"
+                onClick={handleNext}
+                aria-label="Next image"
+              >
+                <ChevronRight className="h-8 w-8" />
+              </Button>
+            </div>
+
+            {/* Close Button */}
+            <DialogClose asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute right-1 top-1 rounded-full bg-white/10 hover:bg-white/30 border-none text-white z-10"
+                aria-label="Close dialog"
+              >
+                <X className="h-5 w-5" />
+              </Button>
+            </DialogClose>
+          </DialogContent>
+        </Dialog>
+      </div>
+    </>
   );
 };
 

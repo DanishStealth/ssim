@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import SEO from "@/components/Seo";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
@@ -78,7 +79,7 @@ const leaders = [
     quoteAuthor: "Prof. (Dr.) Ambuj Jagdish Gupta",
     content: [
       "Management education has evolved to be a premier choice among post-graduation degrees for students all over the world. The growing complexity of business, coupled with quantum leaps in technological advances has made this course, futuristic in its outlook, attracting the best minds to unravel and chart new directions for organizations. Business education provided by business schools should, therefore, integrate these vagaries into the environment to build a competent talent base.",
-      `Siva Sivani Institute of Management (SSIM) is one of the leading business schools in the country offering Post Graduation in Business Management since 1992. These programs are carefully designed in accordance with industry requirements offered by prominent professors from the industry as well as the academic fraternity. SSIM is striving to “achieve and sustain a reputation for excellence in teaching, learning, research and consultancy whilst upholding human values”. These values are imbibed in every fibre of the operations at SSIM and leaders walk the talk to help students emulate these standards!`,
+      `Siva Sivani Institute of Management (SSIM) is one of the leading business schools in the country offering Post Graduation in Business Management since 1992. These programs are carefully designed in accordance with industry requirements offered by prominent professors from the industry as well as the academic fraternity. SSIM is striving to "achieve and sustain a reputation for excellence in teaching, learning, research and consultancy whilst upholding human values". These values are imbibed in every fibre of the operations at SSIM and leaders walk the talk to help students emulate these standards!`,
       `SSIM is committed to shaping students' careers in a way that can be ready to take on entrepreneurial roles. It is our responsibility to offer more specialized and focused programs to meet the industry needs of PGDM-TPS, PGDM-BIFS, and PGDM-Business Analytics.`,
       "PGDM at SSIM is an expedition which helps an individual get acquainted with business expertise and business functionalities. The degree confers one with prospects to broaden his/her aptitude and apply it on the job. The institute's faculty ensures that students acquire knowledge, analyse concepts in given organizational case studies, and overall personality development. The entire learning process provides an individual with a strong foundation to mould careers. These synergistic efforts result in significant changes in the life of a student's career at SSIM.",
       "The benefits of studying PGDM are numerous, especially at SSIM since we provide a different experience in terms of learning through exceptionally qualified faculty members, teaching techniques, case studies and direct attention of faculty members.",
@@ -189,29 +190,37 @@ function LeaderCard({ leader }) {
 
 export default function Leadership() {
   return (
-    <section className="w-full py-16 sm:py-20">
-      <div className="container px-4 md:px-6 mx-auto max-w-5xl">
-        <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">
-            Our Leaders Message
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Meet the visionaries guiding Siva Sivani Institute of Management
-            (SSIM) towards excellence and empowerment.
-          </p>
-        </motion.div>
+    <>
+      <SEO
+        title="Leadership"
+        description="Meet the visionary leaders at Siva Sivani Institute of Management (SSIM). Our leadership team is dedicated to fostering an environment of academic excellence and innovation."
+        keywords="SSIM leadership, business school leaders, management team, academic leadership"
+        canonicalUrl="https://www.ssim.ac.in/about/leadership"
+      />
+      <section className="w-full py-16 sm:py-20">
+        <div className="container px-4 md:px-6 mx-auto max-w-5xl">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">
+              Our Leaders Message
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Meet the visionaries guiding Siva Sivani Institute of Management
+              (SSIM) towards excellence and empowerment.
+            </p>
+          </motion.div>
 
-        <div className="grid gap-8 lg:gap-12">
-          {leaders.map((leader) => (
-            <LeaderCard key={leader.role} leader={leader} />
-          ))}
+          <div className="grid gap-8 lg:gap-12">
+            {leaders.map((leader) => (
+              <LeaderCard key={leader.role} leader={leader} />
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

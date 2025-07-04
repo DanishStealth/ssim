@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import SEO from "@/components/Seo";
 import SaileshSampathy from "../../assets/about/BoardOfStudies/Dr_Sailesh_Sampathy.jpg";
 import Ambuj from "../../assets/about/BoardOfStudies/dr-ambuj (1).jpeg";
 import Kalakar from "../../assets/about/BoardOfStudies/Dr_Kalakar_PP-1.jpg";
@@ -140,57 +141,65 @@ export default function BoardOfStudies() {
   ];
 
   return (
-    <section className="container mx-auto px-4 py-16">
-      <motion.div
-        className="text-center mb-16"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <h2 className="text-4xl sm:text-5xl font-bold text-mainBlue mb-4 tracking-tight">
-          Board Of Studies
-        </h2>
-      </motion.div>
+    <>
+      <SEO
+        title="Board of Studies"
+        description="Meet the Board of Studies at Siva Sivani Institute of Management (SSIM). Our board ensures the curriculum is relevant, rigorous, and industry-aligned."
+        keywords="SSIM board of studies, academic curriculum, course development, business school academics"
+        canonicalUrl="https://www.ssim.ac.in/about/board-of-studies"
+      />
+      <section className="container mx-auto px-4 py-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-4xl sm:text-5xl font-bold text-mainBlue mb-4 tracking-tight">
+            Board Of Studies
+          </h2>
+        </motion.div>
 
-      <div className="grid md:grid-cols-2 sm:gap-8 gap-4 max-w-7xl mx-auto mb-12">
-        {teamMembers.map((member, index) => (
-          <motion.div
-            key={member.id}
-            className="flex flex-col items-center sm:flex-row gap-8 group p-4 rounded-lg bg-gray-100"
-            initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.2 }}
-            onHoverStart={() => setHoveredMember(member.id)}
-            onHoverEnd={() => setHoveredMember(null)}
-          >
-            <div className="relative w-48 h-48 flex-shrink-0 overflow-hidden rounded-lg">
-              <motion.img
-                src={member.image}
-                alt={`${member.name} - ${member.role}`}
-                className="w-full h-full object-cover"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </div>
-            <div className="flex flex-col text-center sm:text-left justify-center">
-              <motion.div
-                initial={false}
-                animate={{ y: hoveredMember === member.id ? -2 : 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                <h3 className="text-xl font-semibold text-zinc-900">
-                  {member.name}
-                </h3>
-                <p className="text-indigo-600 font-medium">{member.role}</p>
-                <p className="text-gray-600 mt-2 mb-4 leading-relaxed">
-                  {member.description}
-                </p>
-              </motion.div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </section>
+        <div className="grid md:grid-cols-2 sm:gap-8 gap-4 max-w-7xl mx-auto mb-12">
+          {teamMembers.map((member, index) => (
+            <motion.div
+              key={member.id}
+              className="flex flex-col items-center sm:flex-row gap-8 group p-4 rounded-lg bg-gray-100"
+              initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              onHoverStart={() => setHoveredMember(member.id)}
+              onHoverEnd={() => setHoveredMember(null)}
+            >
+              <div className="relative w-48 h-48 flex-shrink-0 overflow-hidden rounded-lg">
+                <motion.img
+                  src={member.image}
+                  alt={`${member.name} - ${member.role}`}
+                  className="w-full h-full object-cover"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+              <div className="flex flex-col text-center sm:text-left justify-center">
+                <motion.div
+                  initial={false}
+                  animate={{ y: hoveredMember === member.id ? -2 : 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <h3 className="text-xl font-semibold text-zinc-900">
+                    {member.name}
+                  </h3>
+                  <p className="text-indigo-600 font-medium">{member.role}</p>
+                  <p className="text-gray-600 mt-2 mb-4 leading-relaxed">
+                    {member.description}
+                  </p>
+                </motion.div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }

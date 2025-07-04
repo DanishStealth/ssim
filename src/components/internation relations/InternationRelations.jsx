@@ -20,6 +20,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import InternationalEvents from "./InternationalEvents";
 import DamanJohar from "../../assets/international-relations/Daman-Johar.jpg";
+import SEO from "@/components/Seo";
 
 // Add this at the top of the file, after the imports
 const scrollbarStyles = `
@@ -81,7 +82,7 @@ export default function TestimonialSection() {
 
 She is currently pursuing her Ph.D. Ms Daman is also an established trainer and facilitator with expertise in Communication skills, Soft skills and Behavioral skills. She works across industries and educational institutions running short and long term training workshops and programs. She is passionate about transforming young minds and making them industry ready through her training skills. In her capacity as Chairperson Admissions and Promotions, she aims to recruit students from all across India, to have a culturally diverse pool of students.
 
-She believes that by recruiting students from diverse backgrounds it helps students in developing their creative thinking skills, knowledge on interacting with culturally different back grounds, work in global society, promotes self-awareness, promotes understanding patience’s and cooperation, promotes civic engagement and responsibility. She previously worked in the Indian School of Business (ISB) as an HR Manager.
+She believes that by recruiting students from diverse backgrounds it helps students in developing their creative thinking skills, knowledge on interacting with culturally different back grounds, work in global society, promotes self-awareness, promotes understanding patience's and cooperation, promotes civic engagement and responsibility. She previously worked in the Indian School of Business (ISB) as an HR Manager.
 
 Teaching
 Business Communications
@@ -159,54 +160,47 @@ Human Resources`,
   const currentBiography = testimonials[activeIndex]?.biography || "";
   const showReadMoreButton = isBiographyLong(currentBiography);
 
-  // Add early return if no testimonials
-  if (testimonials.length === 0) {
-    return (
-      <section className="w-full py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center">
-            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
-              No testimonials available
-            </h2>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   return (
-    <section className="w-full py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
-      <style>{scrollbarStyles}</style>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 bg-grid-gray-100 bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+    <>
+      <SEO
+        title="International Relations"
+        description="Explore SSIM's international relations, collaborations, and global initiatives. Discover how we provide a global perspective to our students."
+        keywords="SSIM international relations, global collaboration, international business school, student exchange programs"
+        canonicalUrl="https://www.ssim.ac.in/international-relations"
+      />
+      {testimonials.length === 0 ? (
+        <section className="w-full py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div className="text-center">
+              <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
+                No testimonials available
+              </h2>
+            </div>
+          </div>
+        </section>
+      ) : (
+        <section className="w-full py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+          <style>{scrollbarStyles}</style>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 bg-grid-gray-100 bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
 
-        <div className="relative">
-          {/* Testimonial Label */}
-          {/* <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-2"
-          >
-            <span className="text-mainBlue text-lg font-semibold tracking-wide uppercase">
-              International Relations
-            </span>
-          </motion.div> */}
-
-          {/* Main Heading */}
-          <motion.h2
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-4xl md:text-5xl font-extrabold text-center text-gray-900 mb-16 leading-tight"
-          >
-            International Relations
-          </motion.h2>
-        </div>
-      </div>
-      <InternationalEvents />
-    </section>
+            <div className="relative">
+              {/* Main Heading */}
+              <motion.h2
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="text-4xl md:text-5xl font-extrabold text-center text-gray-900 mb-16 leading-tight"
+              >
+                International Relations
+              </motion.h2>
+            </div>
+          </div>
+          <InternationalEvents />
+        </section>
+      )}
+    </>
   );
 }
 

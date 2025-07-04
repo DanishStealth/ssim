@@ -1,4 +1,5 @@
 import React from "react";
+import SEO from "@/components/Seo";
 import { Timeline } from "@/components/ui/timeline";
 import {
   Card,
@@ -35,42 +36,50 @@ export default function AccreditationsRankings() {
   }));
 
   return (
-    <div className="w-full">
-      <div className="max-w-7xl mx-auto pt-16">
-        <h2 className="px-5 sm:px-0 text-4xl font-bold md:text-5xl text-center text-black dark:text-white">
-          Accreditations & Rankings
-        </h2>
-        {/* <p className="text-neutral-700 dark:text-neutral-300 text-lg max-w-screen-md">
-          I&apos;ve been working on Aceternity for the past 2 years. Here&apos;s
-          a timeline of my journey.
-        </p> */}
-        <Tabs
-          className="px-5 !pt-10 !pb-0 sm:py-20"
-          defaultValue="accreditations"
-        >
-          <TabsList className="grid w-full grid-cols-2 text-[#293794] bg-gradient-to-r from-blue-200 via-blue-50 to-blue-200">
-            <TabsTrigger
-              value="accreditations"
-              className="data-[state=active]:bg-mainBlue data-[state=active]:text-primary-foreground"
-            >
-              Accreditations
-            </TabsTrigger>
-            <TabsTrigger
-              value="rankings"
-              className="data-[state=active]:bg-mainBlue data-[state=active]:text-primary-foreground"
-            >
-              Rankings
-            </TabsTrigger>
-          </TabsList>
-          <TabsContent value="rankings" className="space-y-8 sm:pt-16">
-            <Timeline data={data} />
-          </TabsContent>
-          <TabsContent value="accreditations" className="space-y-8 sm:pt-16">
-            <Accreditations />
-          </TabsContent>
-        </Tabs>
+    <>
+      <SEO
+        title="Accreditations & Rankings"
+        description="View the accreditations and rankings of Siva Sivani Institute of Management (SSIM). We are proud of our recognition for academic excellence and quality education."
+        keywords="SSIM accreditations, SSIM rankings, business school ranking, AICTE approved, NBA accredited"
+        canonicalUrl="https://www.ssim.ac.in/about/accreditations-rankings"
+      />
+      <div className="w-full">
+        <div className="max-w-7xl mx-auto pt-16">
+          <h2 className="px-5 sm:px-0 text-4xl font-bold md:text-5xl text-center text-black dark:text-white">
+            Accreditations & Rankings
+          </h2>
+          {/* <p className="text-neutral-700 dark:text-neutral-300 text-lg max-w-screen-md">
+            I&apos;ve been working on Aceternity for the past 2 years. Here&apos;s
+            a timeline of my journey.
+          </p> */}
+          <Tabs
+            className="px-5 !pt-10 !pb-0 sm:py-20"
+            defaultValue="accreditations"
+          >
+            <TabsList className="grid w-full grid-cols-2 text-[#293794] bg-gradient-to-r from-blue-200 via-blue-50 to-blue-200">
+              <TabsTrigger
+                value="accreditations"
+                className="data-[state=active]:bg-mainBlue data-[state=active]:text-primary-foreground"
+              >
+                Accreditations
+              </TabsTrigger>
+              <TabsTrigger
+                value="rankings"
+                className="data-[state=active]:bg-mainBlue data-[state=active]:text-primary-foreground"
+              >
+                Rankings
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="rankings" className="space-y-8 sm:pt-16">
+              <Timeline data={data} />
+            </TabsContent>
+            <TabsContent value="accreditations" className="space-y-8 sm:pt-16">
+              <Accreditations />
+            </TabsContent>
+          </Tabs>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

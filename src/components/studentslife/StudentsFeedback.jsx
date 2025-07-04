@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import SEO from "@/components/Seo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -197,248 +198,256 @@ export default function FeedbackForm() {
   };
 
   return (
-    <section className="py-16 px-5 sm:px-0 sm:py-20">
-      <Card className="w-full max-w-2xl mx-auto shadow-lg border-t-4 border-t-mainBlue">
-        <CardHeader className="text-center space-y-2 pb-6">
-          <CardTitle className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-mainBlue bg-clip-text text-transparent">
-            Fill the form and share your thoughts...
-          </CardTitle>
-          <p className="text-muted-foreground text-sm">
-            We value your feedback and appreciate your time
-          </p>
-        </CardHeader>
+    <>
+      <SEO
+        title="Student Feedback"
+        description="Share your feedback with Siva Sivani Institute of Management (SSIM). We value your input to help us improve our programs and student experience."
+        keywords="SSIM student feedback, student suggestions, college feedback, program feedback"
+        canonicalUrl="https://www.ssim.ac.in/students-life/students-feedback"
+      />
+      <section className="py-16 px-5 sm:px-0 sm:py-20">
+        <Card className="w-full max-w-2xl mx-auto shadow-lg border-t-4 border-t-mainBlue">
+          <CardHeader className="text-center space-y-2 pb-6">
+            <CardTitle className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-mainBlue bg-clip-text text-transparent">
+              Fill the form and share your thoughts...
+            </CardTitle>
+            <p className="text-muted-foreground text-sm">
+              We value your feedback and appreciate your time
+            </p>
+          </CardHeader>
 
-        <CardContent>
-          <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-2">
-              <Label
-                htmlFor="name"
-                className="text-sm font-medium flex items-center"
-              >
-                Name <span className="text-destructive ml-1">*</span>
-              </Label>
-              <div className="relative">
-                <Input
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="Enter your name"
-                  className={cn(
-                    "transition-all duration-200 pr-10",
-                    errors.name
-                      ? "border-destructive focus-visible:ring-destructive/30"
-                      : "",
-                    validFields.name
-                      ? "border-green-500 focus-visible:ring-green-500/30"
-                      : ""
+          <CardContent>
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+              <div className="space-y-2">
+                <Label
+                  htmlFor="name"
+                  className="text-sm font-medium flex items-center"
+                >
+                  Name <span className="text-destructive ml-1">*</span>
+                </Label>
+                <div className="relative">
+                  <Input
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Enter your name"
+                    className={cn(
+                      "transition-all duration-200 pr-10",
+                      errors.name
+                        ? "border-destructive focus-visible:ring-destructive/30"
+                        : "",
+                      validFields.name
+                        ? "border-green-500 focus-visible:ring-green-500/30"
+                        : ""
+                    )}
+                    aria-invalid={!!errors.name}
+                    aria-describedby={errors.name ? "name-error" : undefined}
+                  />
+                  {validFields.name && (
+                    <CheckCircle2 className="w-5 h-5 text-green-500 absolute right-3 top-1/2 transform -translate-y-1/2" />
                   )}
-                  aria-invalid={!!errors.name}
-                  aria-describedby={errors.name ? "name-error" : undefined}
-                />
-                {validFields.name && (
-                  <CheckCircle2 className="w-5 h-5 text-green-500 absolute right-3 top-1/2 transform -translate-y-1/2" />
-                )}
+                  {errors.name && (
+                    <AlertCircle className="w-5 h-5 text-destructive absolute right-3 top-1/2 transform -translate-y-1/2" />
+                  )}
+                </div>
                 {errors.name && (
-                  <AlertCircle className="w-5 h-5 text-destructive absolute right-3 top-1/2 transform -translate-y-1/2" />
+                  <p
+                    id="name-error"
+                    className="text-destructive text-sm mt-1 animate-fadeIn"
+                  >
+                    {errors.name}
+                  </p>
                 )}
               </div>
-              {errors.name && (
-                <p
-                  id="name-error"
-                  className="text-destructive text-sm mt-1 animate-fadeIn"
-                >
-                  {errors.name}
-                </p>
-              )}
-            </div>
 
-            <div className="space-y-2">
-              <Label
-                htmlFor="studentId"
-                className="text-sm font-medium flex items-center"
-              >
-                Student ID <span className="text-destructive ml-1">*</span>
-              </Label>
-              <div className="relative">
-                <Input
-                  id="studentId"
-                  name="studentId"
-                  value={formData.studentId}
-                  onChange={handleChange}
-                  placeholder="Enter your student ID"
-                  className={cn(
-                    "transition-all duration-200 pr-10",
-                    errors.studentId
-                      ? "border-destructive focus-visible:ring-destructive/30"
-                      : "",
-                    validFields.studentId
-                      ? "border-green-500 focus-visible:ring-green-500/30"
-                      : ""
+              <div className="space-y-2">
+                <Label
+                  htmlFor="studentId"
+                  className="text-sm font-medium flex items-center"
+                >
+                  Student ID <span className="text-destructive ml-1">*</span>
+                </Label>
+                <div className="relative">
+                  <Input
+                    id="studentId"
+                    name="studentId"
+                    value={formData.studentId}
+                    onChange={handleChange}
+                    placeholder="Enter your student ID"
+                    className={cn(
+                      "transition-all duration-200 pr-10",
+                      errors.studentId
+                        ? "border-destructive focus-visible:ring-destructive/30"
+                        : "",
+                      validFields.studentId
+                        ? "border-green-500 focus-visible:ring-green-500/30"
+                        : ""
+                    )}
+                    aria-invalid={!!errors.studentId}
+                    aria-describedby={
+                      errors.studentId ? "studentId-error" : undefined
+                    }
+                  />
+                  {validFields.studentId && (
+                    <CheckCircle2 className="w-5 h-5 text-green-500 absolute right-3 top-1/2 transform -translate-y-1/2" />
                   )}
-                  aria-invalid={!!errors.studentId}
-                  aria-describedby={
-                    errors.studentId ? "studentId-error" : undefined
-                  }
-                />
-                {validFields.studentId && (
-                  <CheckCircle2 className="w-5 h-5 text-green-500 absolute right-3 top-1/2 transform -translate-y-1/2" />
-                )}
+                  {errors.studentId && (
+                    <AlertCircle className="w-5 h-5 text-destructive absolute right-3 top-1/2 transform -translate-y-1/2" />
+                  )}
+                </div>
                 {errors.studentId && (
-                  <AlertCircle className="w-5 h-5 text-destructive absolute right-3 top-1/2 transform -translate-y-1/2" />
+                  <p
+                    id="studentId-error"
+                    className="text-destructive text-sm mt-1 animate-fadeIn"
+                  >
+                    {errors.studentId}
+                  </p>
                 )}
               </div>
-              {errors.studentId && (
-                <p
-                  id="studentId-error"
-                  className="text-destructive text-sm mt-1 animate-fadeIn"
-                >
-                  {errors.studentId}
-                </p>
-              )}
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <Label
-                  htmlFor="email"
-                  className="text-sm font-medium flex items-center"
-                >
-                  Email <span className="text-destructive ml-1">*</span>
-                </Label>
-                <div className="relative">
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Enter your email"
-                    className={cn(
-                      "transition-all duration-200 pr-10",
-                      errors.email
-                        ? "border-destructive focus-visible:ring-destructive/30"
-                        : "",
-                      validFields.email
-                        ? "border-green-500 focus-visible:ring-green-500/30"
-                        : ""
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="email"
+                    className="text-sm font-medium flex items-center"
+                  >
+                    Email <span className="text-destructive ml-1">*</span>
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="Enter your email"
+                      className={cn(
+                        "transition-all duration-200 pr-10",
+                        errors.email
+                          ? "border-destructive focus-visible:ring-destructive/30"
+                          : "",
+                        validFields.email
+                          ? "border-green-500 focus-visible:ring-green-500/30"
+                          : ""
+                      )}
+                      aria-invalid={!!errors.email}
+                      aria-describedby={errors.email ? "email-error" : undefined}
+                    />
+                    {validFields.email && (
+                      <CheckCircle2 className="w-5 h-5 text-green-500 absolute right-3 top-1/2 transform -translate-y-1/2" />
                     )}
-                    aria-invalid={!!errors.email}
-                    aria-describedby={errors.email ? "email-error" : undefined}
-                  />
-                  {validFields.email && (
-                    <CheckCircle2 className="w-5 h-5 text-green-500 absolute right-3 top-1/2 transform -translate-y-1/2" />
-                  )}
+                    {errors.email && (
+                      <AlertCircle className="w-5 h-5 text-destructive absolute right-3 top-1/2 transform -translate-y-1/2" />
+                    )}
+                  </div>
                   {errors.email && (
-                    <AlertCircle className="w-5 h-5 text-destructive absolute right-3 top-1/2 transform -translate-y-1/2" />
+                    <p
+                      id="email-error"
+                      className="text-destructive text-sm mt-1 animate-fadeIn"
+                    >
+                      {errors.email}
+                    </p>
                   )}
                 </div>
-                {errors.email && (
-                  <p
-                    id="email-error"
-                    className="text-destructive text-sm mt-1 animate-fadeIn"
+
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="phone"
+                    className="text-sm font-medium flex items-center"
                   >
-                    {errors.email}
-                  </p>
-                )}
+                    Phone <span className="text-destructive ml-1">*</span>
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="Enter your phone number"
+                      className={cn(
+                        "transition-all duration-200 pr-10",
+                        errors.phone
+                          ? "border-destructive focus-visible:ring-destructive/30"
+                          : "",
+                        validFields.phone
+                          ? "border-green-500 focus-visible:ring-green-500/30"
+                          : ""
+                      )}
+                      aria-invalid={!!errors.phone}
+                      aria-describedby={errors.phone ? "phone-error" : undefined}
+                    />
+                    {validFields.phone && (
+                      <CheckCircle2 className="w-5 h-5 text-green-500 absolute right-3 top-1/2 transform -translate-y-1/2" />
+                    )}
+                    {errors.phone && (
+                      <AlertCircle className="w-5 h-5 text-destructive absolute right-3 top-1/2 transform -translate-y-1/2" />
+                    )}
+                  </div>
+                  {errors.phone && (
+                    <p
+                      id="phone-error"
+                      className="text-destructive text-sm mt-1 animate-fadeIn"
+                    >
+                      {errors.phone}
+                    </p>
+                  )}
+                </div>
               </div>
 
               <div className="space-y-2">
-                <Label
-                  htmlFor="phone"
-                  className="text-sm font-medium flex items-center"
-                >
-                  Phone <span className="text-destructive ml-1">*</span>
+                <Label htmlFor="message" className="text-sm font-medium">
+                  Comment or Message
                 </Label>
-                <div className="relative">
-                  <Input
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="Enter your phone number"
-                    className={cn(
-                      "transition-all duration-200 pr-10",
-                      errors.phone
-                        ? "border-destructive focus-visible:ring-destructive/30"
-                        : "",
-                      validFields.phone
-                        ? "border-green-500 focus-visible:ring-green-500/30"
-                        : ""
-                    )}
-                    aria-invalid={!!errors.phone}
-                    aria-describedby={errors.phone ? "phone-error" : undefined}
-                  />
-                  {validFields.phone && (
-                    <CheckCircle2 className="w-5 h-5 text-green-500 absolute right-3 top-1/2 transform -translate-y-1/2" />
-                  )}
-                  {errors.phone && (
-                    <AlertCircle className="w-5 h-5 text-destructive absolute right-3 top-1/2 transform -translate-y-1/2" />
-                  )}
-                </div>
-                {errors.phone && (
+                <Textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Share your thoughts here..."
+                  className="min-h-[120px] resize-none transition-all duration-200"
+                  aria-invalid={!!errors.message}
+                  aria-describedby={errors.message ? "message-error" : undefined}
+                />
+                {errors.message && (
                   <p
-                    id="phone-error"
+                    id="message-error"
                     className="text-destructive text-sm mt-1 animate-fadeIn"
                   >
-                    {errors.phone}
+                    {errors.message}
                   </p>
                 )}
               </div>
-            </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="message" className="text-sm font-medium">
-                Comment or Message
-              </Label>
-              <Textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                placeholder="Share your thoughts here..."
-                className="min-h-[120px] resize-none transition-all duration-200"
-                aria-invalid={!!errors.message}
-                aria-describedby={errors.message ? "message-error" : undefined}
-              />
-              {errors.message && (
-                <p
-                  id="message-error"
-                  className="text-destructive text-sm mt-1 animate-fadeIn"
+              <div className="pt-2">
+                <Button
+                  type="submit"
+                  className="w-full sm:w-auto min-w-[120px] bg-mainBlue text-white hover:bg-mainBlue/80 transition-all duration-300 flex items-center gap-2"
+                  disabled={isSubmitting}
                 >
-                  {errors.message}
-                </p>
-              )}
-            </div>
+                  {isSubmitting ? (
+                    <>
+                      <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                      Submitting...
+                    </>
+                  ) : (
+                    <>
+                      Submit <Send className="w-4 h-4 ml-1" />
+                    </>
+                  )}
+                </Button>
+              </div>
+            </form>
+          </CardContent>
 
-            <div className="pt-2">
-              <Button
-                type="submit"
-                className="w-full sm:w-auto min-w-[120px] bg-mainBlue text-white hover:bg-mainBlue/80 transition-all duration-300 flex items-center gap-2"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <>
-                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-                    Submitting...
-                  </>
-                ) : (
-                  <>
-                    Submit <Send className="w-4 h-4 ml-1" />
-                  </>
-                )}
-              </Button>
-            </div>
-          </form>
-        </CardContent>
-
-        <CardFooter className="flex justify-center border-t pt-6 text-center text-sm text-muted-foreground">
-          <p>
-            All fields marked with <span className="text-destructive">*</span>{" "}
-            are required
-          </p>
-        </CardFooter>
-      </Card>
-    </section>
+          <CardFooter className="flex justify-center border-t pt-6 text-center text-sm text-muted-foreground">
+            <p>
+              All fields marked with <span className="text-destructive">*</span>{" "}
+              are required
+            </p>
+          </CardFooter>
+        </Card>
+      </section>
+    </>
   );
 }

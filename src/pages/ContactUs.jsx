@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SEO from "@/components/Seo";
 import {
   Card,
   CardContent,
@@ -249,7 +250,7 @@ const ContactUs = () => {
     if (isValid) {
       try {
         // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await new Promise((resolve) => setTimeout(resolve, 1500));
 
         console.log("Form data:", formData);
         setSubmitSuccess(true);
@@ -269,11 +270,13 @@ const ContactUs = () => {
         // Hide success message after 5 seconds
         setTimeout(() => setSubmitSuccess(false), 5000);
       } catch (error) {
-        console.error("Submission error:", error);
+        console.error("Submission failed:", error);
+      } finally {
+        setIsSubmitting(false);
       }
+    } else {
+      setIsSubmitting(false);
     }
-
-    setIsSubmitting(false);
   };
 
   const contactInfo = [
@@ -371,202 +374,210 @@ const ContactUs = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        {/* Success Alert */}
-        {submitSuccess && (
-          <Alert className="mb-6 border-green-200 bg-green-50">
-            <CheckCircle className="h-4 w-4 text-green-600" />
-            <AlertDescription className="text-green-800">
-              Thank you for your message! We'll get back to you as soon as
-              possible.
-            </AlertDescription>
-          </Alert>
-        )}
+    <>
+      <SEO
+        title="Contact Us"
+        description="Get in touch with Siva Sivani Institute of Management (SSIM). Find our address, phone number, and email for admissions, placements, and general inquiries."
+        keywords="SSIM contact, contact siva sivani, ssim hyderabad address, ssim phone number"
+        canonicalUrl="https://www.ssim.ac.in/contact-us"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          {/* Success Alert */}
+          {submitSuccess && (
+            <Alert className="mb-6 border-green-200 bg-green-50">
+              <CheckCircle className="h-4 w-4 text-green-600" />
+              <AlertDescription className="text-green-800">
+                Thank you for your message! We'll get back to you as soon as
+                possible.
+              </AlertDescription>
+            </Alert>
+          )}
 
-        <Card className="border-none shadow-xl overflow-hidden bg-white/80 backdrop-blur-sm">
-          <CardHeader className="bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white p-8 md:p-12">
-            <CardTitle className="text-4xl md:text-5xl font-bold tracking-tight">
-              Contact Us
-            </CardTitle>
-            <CardDescription className="text-xl text-blue-100 mt-3">
-              We'd love to hear from you! Get in touch with us today.
-            </CardDescription>
-          </CardHeader>
+          <Card className="border-none shadow-xl overflow-hidden bg-white/80 backdrop-blur-sm">
+            <CardHeader className="bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white p-8 md:p-12">
+              <CardTitle className="text-4xl md:text-5xl font-bold tracking-tight">
+                Contact Us
+              </CardTitle>
+              <CardDescription className="text-xl text-blue-100 mt-3">
+                We'd love to hear from you! Get in touch with us today.
+              </CardDescription>
+            </CardHeader>
 
-          <CardContent className="p-8 md:p-12">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-              {/* Contact Information */}
-              <div className="space-y-2">
-                <h3 className="text-2xl font-semibold text-gray-800 mb-6">
-                  Get in Touch
-                </h3>
-                {contactInfo.map((info, index) => {
-                  const IconComponent = info.icon;
-                  return (
-                    <Card
-                      key={index}
-                      className="border border-gray-200 hover:shadow-md transition-shadow duration-200"
-                    >
-                      <CardContent className="flex items-start space-x-4 p-4">
-                        <div className="flex-shrink-0">
-                          <IconComponent className="h-6 w-6 text-blue-600" />
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="font-semibold text-gray-800 mb-2">
-                            {info.title}
-                          </h4>
-                          <div className="text-sm text-gray-600 space-y-1">
-                            {typeof info.content === "string" ? (
-                              <p>{info.content}</p>
-                            ) : (
-                              info.content
-                            )}
+            <CardContent className="p-8 md:p-12">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                {/* Contact Information */}
+                <div className="space-y-2">
+                  <h3 className="text-2xl font-semibold text-gray-800 mb-6">
+                    Get in Touch
+                  </h3>
+                  {contactInfo.map((info, index) => {
+                    const IconComponent = info.icon;
+                    return (
+                      <Card
+                        key={index}
+                        className="border border-gray-200 hover:shadow-md transition-shadow duration-200"
+                      >
+                        <CardContent className="flex items-start space-x-4 p-4">
+                          <div className="flex-shrink-0">
+                            <IconComponent className="h-6 w-6 text-blue-600" />
                           </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
+                          <div className="flex-1">
+                            <h4 className="font-semibold text-gray-800 mb-2">
+                              {info.title}
+                            </h4>
+                            <div className="text-sm text-gray-600 space-y-1">
+                              {typeof info.content === "string" ? (
+                                <p>{info.content}</p>
+                              ) : (
+                                info.content
+                              )}
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+
+                {/* Contact Form */}
+                <Card className="lg:col-span-2 border border-gray-200 shadow-lg">
+                  <CardHeader className="pb-6">
+                    <CardTitle className="text-2xl font-semibold text-blue-700 flex items-center gap-2">
+                      <Send className="h-6 w-6" />
+                      Send us a message
+                    </CardTitle>
+                    <CardDescription className="text-gray-600">
+                      Fill out the form below and we'll get back to you as soon as
+                      possible.
+                    </CardDescription>
+                  </CardHeader>
+
+                  <CardContent>
+                    <form onSubmit={handleSubmit} className="space-y-5">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <InputField
+                          name="firstName"
+                          label="First Name"
+                          placeholder="Enter your first name"
+                          formData={formData}
+                          errors={errors}
+                          touched={touched}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                        <InputField
+                          name="lastName"
+                          label="Last Name"
+                          placeholder="Enter your last name"
+                          formData={formData}
+                          errors={errors}
+                          touched={touched}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <InputField
+                          name="email"
+                          label="Email Address"
+                          type="email"
+                          placeholder="Enter your email address"
+                          formData={formData}
+                          errors={errors}
+                          touched={touched}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                        <InputField
+                          name="phone"
+                          label="Phone Number"
+                          placeholder="Enter your phone number"
+                          formData={formData}
+                          errors={errors}
+                          touched={touched}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                      </div>
+
+                      <InputField
+                        name="subject"
+                        label="Subject"
+                        placeholder="What is this regarding?"
+                        formData={formData}
+                        errors={errors}
+                        touched={touched}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      />
+
+                      <TextareaField
+                        name="message"
+                        label="Message"
+                        className="min-h-[180px] h-full"
+                        placeholder="Tell us more about your inquiry..."
+                        formData={formData}
+                        errors={errors}
+                        touched={touched}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      />
+
+                      <Button
+                        type="submit"
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 text-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                            Sending Message...
+                          </>
+                        ) : (
+                          <>
+                            <Send className="h-4 w-4 mr-2" />
+                            Send Message
+                          </>
+                        )}
+                      </Button>
+                    </form>
+                  </CardContent>
+                </Card>
               </div>
+            </CardContent>
+          </Card>
 
-              {/* Contact Form */}
-              <Card className="lg:col-span-2 border border-gray-200 shadow-lg">
-                <CardHeader className="pb-6">
-                  <CardTitle className="text-2xl font-semibold text-blue-700 flex items-center gap-2">
-                    <Send className="h-6 w-6" />
-                    Send us a message
-                  </CardTitle>
-                  <CardDescription className="text-gray-600">
-                    Fill out the form below and we'll get back to you as soon as
-                    possible.
-                  </CardDescription>
-                </CardHeader>
-
-                <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-5">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <InputField
-                        name="firstName"
-                        label="First Name"
-                        placeholder="Enter your first name"
-                        formData={formData}
-                        errors={errors}
-                        touched={touched}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                      />
-                      <InputField
-                        name="lastName"
-                        label="Last Name"
-                        placeholder="Enter your last name"
-                        formData={formData}
-                        errors={errors}
-                        touched={touched}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <InputField
-                        name="email"
-                        label="Email Address"
-                        type="email"
-                        placeholder="Enter your email address"
-                        formData={formData}
-                        errors={errors}
-                        touched={touched}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                      />
-                      <InputField
-                        name="phone"
-                        label="Phone Number"
-                        placeholder="Enter your phone number"
-                        formData={formData}
-                        errors={errors}
-                        touched={touched}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                      />
-                    </div>
-
-                    <InputField
-                      name="subject"
-                      label="Subject"
-                      placeholder="What is this regarding?"
-                      formData={formData}
-                      errors={errors}
-                      touched={touched}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-
-                    <TextareaField
-                      name="message"
-                      label="Message"
-                      className="min-h-[180px] h-full"
-                      placeholder="Tell us more about your inquiry..."
-                      formData={formData}
-                      errors={errors}
-                      touched={touched}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-
-                    <Button
-                      type="submit"
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 text-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                          Sending Message...
-                        </>
-                      ) : (
-                        <>
-                          <Send className="h-4 w-4 mr-2" />
-                          Send Message
-                        </>
-                      )}
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Map Section */}
-        <Card className="mt-8 border-none shadow-xl overflow-hidden bg-white/80 backdrop-blur-sm">
-          <CardHeader className="p-6">
-            <CardTitle className="text-2xl font-semibold text-gray-800 flex items-center gap-2">
-              <MapPin className="h-6 w-6 text-blue-600" />
-              Find Us Here
-            </CardTitle>
-            <CardDescription className="text-gray-600">
-              Visit our campus located in Kompally, Secunderabad
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="p-0">
-            <div className="relative">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3804.444089771495!2d78.48308207436037!3d17.534030983378358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb855abbdd1bd9%3A0x40fab830f7127b5!2sSiva%20Sivani%20Institute%20of%20Management%20%5BBschool%20in%20Hyderabad%5D!5e0!3m2!1sen!2sin!4v1734608560811!5m2!1sen!2sin"
-                width="100%"
-                height="450"
-                style={{ border: 0 }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="rounded-b-lg"
-              ></iframe>
-            </div>
-          </CardContent>
-        </Card>
+          {/* Map Section */}
+          <Card className="mt-8 border-none shadow-xl overflow-hidden bg-white/80 backdrop-blur-sm">
+            <CardHeader className="p-6">
+              <CardTitle className="text-2xl font-semibold text-gray-800 flex items-center gap-2">
+                <MapPin className="h-6 w-6 text-blue-600" />
+                Find Us Here
+              </CardTitle>
+              <CardDescription className="text-gray-600">
+                Visit our campus located in Kompally, Secunderabad
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="p-0">
+              <div className="relative">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3804.444089771495!2d78.48308207436037!3d17.534030983378358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb855abbdd1bd9%3A0x40fab830f7127b5!2sSiva%20Sivani%20Institute%20of%20Management%20%5BBschool%20in%20Hyderabad%5D!5e0!3m2!1sen!2sin!4v1734608560811!5m2!1sen!2sin"
+                  width="100%"
+                  height="450"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="rounded-b-lg"
+                ></iframe>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

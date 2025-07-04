@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SEO from "@/components/Seo";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -53,6 +54,7 @@ export default function BlogDetail() {
       return {
         title: post.title.rendered,
         content: post.content.rendered,
+        description: post.excerpt.rendered.replace(/<[^>]+>/g, ''),
         publishDate: new Date(post.date).toLocaleDateString("en-US", {
           year: "numeric",
           month: "long",
@@ -119,144 +121,153 @@ export default function BlogDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50/50 py-16 sm:py-20">
-      <div className="container mx-auto px-4 max-w-4xl">
-        {/* Back Button */}
-        <Button
-          variant="ghost"
-          className="mb-8 text-blue-600 hover:text-blue-700 hover:bg-blue-50 -ml-2"
-          onClick={() => window.history.back()}
-        >
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Articles
-        </Button>
+    <>
+      <SEO
+        title={blog.title}
+        description={blog.description}
+        keywords={blog.categories.join(', ')}
+        canonicalUrl={`https://www.ssim.ac.in/blog/${id}`}
+        ogImage={blog.imageUrl}
+      />
+      <div className="min-h-screen bg-slate-50/50 py-16 sm:py-20">
+        <div className="container mx-auto px-4 max-w-4xl">
+          {/* Back Button */}
+          <Button
+            variant="ghost"
+            className="mb-8 text-blue-600 hover:text-blue-700 hover:bg-blue-50 -ml-2"
+            onClick={() => window.history.back()}
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Articles
+          </Button>
 
-        {/* Main Content */}
-        <article className="space-y-8">
-          {/* Header */}
-          <div className="space-y-6">
-            <div className="flex gap-2 flex-wrap">
-              {blog.categories.map((category) => (
-                <Badge
-                  key={category}
-                  variant="secondary"
-                  className="bg-blue-100 text-blue-700 hover:bg-blue-200"
-                >
-                  {category}
-                </Badge>
-              ))}
-            </div>
-
-            {/* Main Title */}
-            <h1 
-              className="text-5xl md:text-6xl font-bold text-mainBlue leading-tight"
-              dangerouslySetInnerHTML={{ 
-                __html: blog.title 
-              }}
-            />
-
-            {/* Author and Meta Info */}
-            <div className="flex items-center justify-between flex-wrap gap-4">
-              <div className="flex items-center space-x-4">
-                <Avatar className="h-12 w-12 border-2 border-blue-100">
-                  <AvatarImage
-                    src={blog.author.avatar}
-                    alt={blog.author.name}
-                  />
-                  <AvatarFallback>SJ</AvatarFallback>
-                </Avatar>
-                <div>
-                  <p className="font-semibold text-slate-900">
-                    {blog.author.name}
-                  </p>
-                  <p className="text-sm text-slate-600">{blog.author.role}</p>
-                </div>
+          {/* Main Content */}
+          <article className="space-y-8">
+            {/* Header */}
+            <div className="space-y-6">
+              <div className="flex gap-2 flex-wrap">
+                {blog.categories.map((category) => (
+                  <Badge
+                    key={category}
+                    variant="secondary"
+                    className="bg-blue-100 text-blue-700 hover:bg-blue-200"
+                  >
+                    {category}
+                  </Badge>
+                ))}
               </div>
-              <div className="flex items-center space-x-4 text-sm text-slate-600">
-                <div className="flex items-center">
-                  <Calendar className="h-4 w-4 mr-2" />
-                  {blog.publishDate}
-                </div>
-                <div className="flex items-center">
-                  <Clock className="h-4 w-4 mr-2" />
-                  {blog.readTime}
-                </div>
-              </div>
-            </div>
-          </div>
 
-          {/* Featured Image */}
-          <div className="relative h-[400px] rounded-2xl overflow-hidden">
-            <img
-              src={blog.imageUrl}
-              alt="Blog featured image"
-              className="object-cover w-full h-full"
-            />
-          </div>
-
-          {/* Content */}
-          <Card className="border-none shadow-lg">
-            <CardContent className="p-8">
-              <div 
-                className="prose prose-blue max-w-none prose-headings:text-mainBlue prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl prose-h4:text-xl prose-h5:text-lg prose-h6:text-base prose-headings:font-semibold"
-                dangerouslySetInnerHTML={{
-                  __html: processContent(blog.content)
+              {/* Main Title */}
+              <h1 
+                className="text-5xl md:text-6xl font-bold text-mainBlue leading-tight"
+                dangerouslySetInnerHTML={{ 
+                  __html: blog.title 
                 }}
               />
-            </CardContent>
-          </Card>
 
-          {/* Engagement Section */}
-          {/* <div className="flex items-center justify-between py-6">
-            <div className="flex items-center space-x-4">
-              <Button
-                variant="ghost"
-                size="sm"
-                className={`flex items-center space-x-2 ${
-                  isLiked
-                    ? "text-red-500 hover:text-red-600"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
-                onClick={() => setIsLiked(!isLiked)}
-              >
-                <Heart className={`h-5 w-5 ${isLiked ? "fill-current" : ""}`} />
-                <span>123</span>
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="flex items-center space-x-2 text-slate-600 hover:text-slate-900"
-              >
-                <MessageCircle className="h-5 w-5" />
-                <span>Comments</span>
-              </Button>
+              {/* Author and Meta Info */}
+              <div className="flex items-center justify-between flex-wrap gap-4">
+                <div className="flex items-center space-x-4">
+                  <Avatar className="h-12 w-12 border-2 border-blue-100">
+                    <AvatarImage
+                      src={blog.author.avatar}
+                      alt={blog.author.name}
+                    />
+                    <AvatarFallback>SJ</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <p className="font-semibold text-slate-900">
+                      {blog.author.name}
+                    </p>
+                    <p className="text-sm text-slate-600">{blog.author.role}</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-4 text-sm text-slate-600">
+                  <div className="flex items-center">
+                    <Calendar className="h-4 w-4 mr-2" />
+                    {blog.publishDate}
+                  </div>
+                  <div className="flex items-center">
+                    <Clock className="h-4 w-4 mr-2" />
+                    {blog.readTime}
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="flex items-center space-x-2">
-              <Button
-                variant="ghost"
-                size="sm"
-                className={`${
-                  isBookmarked ? "text-blue-600" : "text-slate-600"
-                } hover:text-blue-700`}
-                onClick={() => setIsBookmarked(!isBookmarked)}
-              >
-                <BookmarkIcon
-                  className={`h-5 w-5 ${isBookmarked ? "fill-current" : ""}`}
+
+            {/* Featured Image */}
+            <div className="relative h-[400px] rounded-2xl overflow-hidden">
+              <img
+                src={blog.imageUrl}
+                alt="Blog featured image"
+                className="object-cover w-full h-full"
+              />
+            </div>
+
+            {/* Content */}
+            <Card className="border-none shadow-lg">
+              <CardContent className="p-8">
+                <div 
+                  className="prose prose-blue max-w-none prose-headings:text-mainBlue prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl prose-h4:text-xl prose-h5:text-lg prose-h6:text-base prose-headings:font-semibold"
+                  dangerouslySetInnerHTML={{
+                    __html: processContent(blog.content)
+                  }}
                 />
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-slate-600 hover:text-slate-900"
-              >
-                <Share2 className="h-5 w-5" />
-              </Button>
-            </div>
-          </div> */}
+              </CardContent>
+            </Card>
 
-          {/* <Separator className="my-8" /> */}
-        </article>
+            {/* Engagement Section */}
+            {/* <div className="flex items-center justify-between py-6">
+              <div className="flex items-center space-x-4">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className={`flex items-center space-x-2 ${
+                    isLiked
+                      ? "text-red-500 hover:text-red-600"
+                      : "text-slate-600 hover:text-slate-900"
+                  }`}
+                  onClick={() => setIsLiked(!isLiked)}
+                >
+                  <Heart className={`h-5 w-5 ${isLiked ? "fill-current" : ""}`} />
+                  <span>123</span>
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="flex items-center space-x-2 text-slate-600 hover:text-slate-900"
+                >
+                  <MessageCircle className="h-5 w-5" />
+                  <span>Comments</span>
+                </Button>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className={`${
+                    isBookmarked ? "text-blue-600" : "text-slate-600"
+                  } hover:text-blue-700`}
+                  onClick={() => setIsBookmarked(!isBookmarked)}
+                >
+                  <BookmarkIcon
+                    className={`h-5 w-5 ${isBookmarked ? "fill-current" : ""}`}
+                  />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-slate-600 hover:text-slate-900"
+                >
+                  <Share2 className="h-5 w-5" />
+                </Button>
+              </div>
+            </div> */}
+
+            {/* <Separator className="my-8" /> */}
+          </article>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
