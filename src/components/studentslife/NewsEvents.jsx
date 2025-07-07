@@ -182,7 +182,7 @@ const NewsEvents = () => {
                     onClick={() => setSelectedImageIndex(index)}
                   >
                     <img
-                      className="h-auto max-w-full rounded-lg aspect-[4/3] object-cover"
+                      className="h-auto max-w-full rounded-lg aspect-[4/3] object-contain"
                       src={image.src}
                       alt={image.alt}
                     />
