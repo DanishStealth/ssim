@@ -24,7 +24,7 @@ export default function LatestBlogsAndEvents() {
           className="w-full text-center sm:col-span-4 "
         />
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 h-[720px] sm:max-h-[500px]">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 h-[780px] xs:h-[720px] sm:max-h-[500px]">
           {latestPost && (
             <a href={`/blog/${latestPost.slug}`}>
               {" "}
@@ -115,13 +115,13 @@ const FirstBlog = ({ post }) => {
   });
 
   return (
-    <Card className="relative rounded-none sm:h-full xs:h-[262px] overflow-hidden">
-      <CardContent className="p-0 rounded-none sm:h-full xs:h-[262px]">
+    <Card className="relative rounded-none sm:h-full h-[262px] overflow-hidden">
+      <CardContent className="p-0 rounded-none sm:h-full h-[262px]">
         <div className="h-full ">
           <img
             src={imageUrl}
             alt="Main event"
-            className="object-cover blur-sm w-full sm:h-full xs:h-[262px] aspect-video"
+            className="object-cover blur-sm w-full sm:h-full h-[262px] aspect-video"
           />
           <div className="absolute  bottom-0 left-0 right-0 p-3 space-y-2 sm:p-10 sm:space-y-4 bg-gradient-to-t from-black to-transparent">
             <div className="relative space-y-2">
