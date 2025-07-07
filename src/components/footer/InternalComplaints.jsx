@@ -16,9 +16,17 @@ import {
   AlertTriangle,
   CheckCircle,
 } from "lucide-react";
+import SEO from "../Seo";
 
 export default function InternalComplaints() {
   return (
+    <>
+    <SEO
+        title="Internal Complaints Committee"
+        description="Learn about the Internal Complaints Committee at Siva Sivani Institute of Management (SSIM). Get information on the committee's establishment, responsibilities, and how to submit complaints."
+        keywords="SSIM internal complaints, complaints committee, sexual harassment, workplace environment, SSIM committee"
+        canonicalUrl="https://www.ssim.ac.in/internal-complaints"
+      />
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Header Section */}
@@ -249,5 +257,6 @@ export default function InternalComplaints() {
         </Card>
       </div>
     </div>
+    </>
   );
 }

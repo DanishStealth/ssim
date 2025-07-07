@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dialog"; // Adjust path as needed
 import { Skeleton } from "@/components/ui/skeleton"; // Adjust path as needed
 import WordPullUp from "../ui/word-pull-up";
+import SEO from "../Seo";
 
 // Utility function
 const cn = (...classes) => classes.filter(Boolean).join(" ");
@@ -121,76 +122,125 @@ Presence of institutes' representative gives them immense happiness; they look f
 // Replace all individual samaroh imports with this
 const samarohImages = Array.from({ length: 21 }, (_, i) => ({
   id: i + 1,
-  src: new URL(`../../assets/studentslife/life-at-ssim/samaroh/samaroh (${i + 1}).webp`, import.meta.url).href,
+  src: new URL(
+    `../../assets/studentslife/life-at-ssim/samaroh/samaroh (${i + 1}).webp`,
+    import.meta.url
+  ).href,
   category: "3",
   alt: `samaroh image ${i + 1}`,
 }));
 
 const samanvayImages = Array.from({ length: 12 }, (_, i) => ({
   id: i + 1,
-  src: new URL(`../../assets/studentslife/life-at-ssim/samanvay/samanvay (${i + 1}).webp`, import.meta.url).href,
+  src: new URL(
+    `../../assets/studentslife/life-at-ssim/samanvay/samanvay (${i + 1}).webp`,
+    import.meta.url
+  ).href,
   category: "4",
   alt: `samanvay image ${i + 1}`,
 }));
 
 const sameekshaImages = Array.from({ length: 23 }, (_, i) => ({
   id: i + 1,
-  src: new URL(`../../assets/studentslife/life-at-ssim/sameeksha/sameeksha (${i + 1}).webp`, import.meta.url).href,
+  src: new URL(
+    `../../assets/studentslife/life-at-ssim/sameeksha/sameeksha (${
+      i + 1
+    }).webp`,
+    import.meta.url
+  ).href,
   category: "5",
   alt: `sameeksha image ${i + 1}`,
 }));
 
 const snehaImages = Array.from({ length: 42 }, (_, i) => ({
   id: i + 1,
-  src: new URL(`../../assets/studentslife/life-at-ssim/sneha/sneha (${i + 1}).${i > 39 ? 'png' : 'webp'}`, import.meta.url).href,
-  category: "7", 
+  src: new URL(
+    `../../assets/studentslife/life-at-ssim/sneha/sneha (${i + 1}).${
+      i > 39 ? "png" : "webp"
+    }`,
+    import.meta.url
+  ).href,
+  category: "7",
   alt: `sneha image ${i + 1}`,
 }));
 
 const sadhanaImages = Array.from({ length: 14 }, (_, i) => ({
   id: i + 1,
-  src: new URL(`../../assets/studentslife/life-at-ssim/sadhana/sadhana (${i + 1}).webp`, import.meta.url).href,
+  src: new URL(
+    `../../assets/studentslife/life-at-ssim/sadhana/sadhana (${i + 1}).webp`,
+    import.meta.url
+  ).href,
   category: "8",
   alt: `sadhana image ${i + 1}`,
 }));
 
 const snatakImages = Array.from({ length: 21 }, (_, i) => ({
   id: i + 1,
-  src: new URL(`../../assets/studentslife/life-at-ssim/snatak/snatak (${i + 1}).webp`, import.meta.url).href,
+  src: new URL(
+    `../../assets/studentslife/life-at-ssim/snatak/snatak (${i + 1}).webp`,
+    import.meta.url
+  ).href,
   category: "9",
   alt: `snatak image ${i + 1}`,
 }));
 
 const sanmanImages = Array.from({ length: 2 }, (_, i) => ({
   id: i + 1,
-  src: new URL(`../../assets/studentslife/life-at-ssim/sanman/sanman (${i + 1}).webp`, import.meta.url).href,
+  src: new URL(
+    `../../assets/studentslife/life-at-ssim/sanman/sanman (${i + 1}).webp`,
+    import.meta.url
+  ).href,
   category: "10",
   alt: `sanman image ${i + 1}`,
 }));
 
 const satakshiImages = Array.from({ length: 9 }, (_, i) => ({
   id: i + 1,
-  src: new URL(`../../assets/studentslife/life-at-ssim/satakshi/satakshi (${i + 1}).webp`, import.meta.url).href,
+  src: new URL(
+    `../../assets/studentslife/life-at-ssim/satakshi/satakshi (${i + 1}).webp`,
+    import.meta.url
+  ).href,
   category: "11",
   alt: `satakshi image ${i + 1}`,
 }));
 
 const sanghibhavImages = Array.from({ length: 11 }, (_, i) => ({
   id: i + 1,
-  src: new URL(`../../assets/studentslife/life-at-ssim/sanghibhav/sanghibhav (${i + 1}).webp`, import.meta.url).href,
+  src: new URL(
+    `../../assets/studentslife/life-at-ssim/sanghibhav/sanghibhav (${
+      i + 1
+    }).webp`,
+    import.meta.url
+  ).href,
   category: "12",
   alt: `sanghibhav image ${i + 1}`,
 }));
 
 const samskritiImages = Array.from({ length: 25 }, (_, i) => ({
   id: i + 1,
-  src: new URL(`../../assets/studentslife/life-at-ssim/samskriti/samskriti (${i + 1}).webp`, import.meta.url).href,
+  src: new URL(
+    `../../assets/studentslife/life-at-ssim/samskriti/samskriti (${
+      i + 1
+    }).webp`,
+    import.meta.url
+  ).href,
   category: "13",
   alt: `samskriti image ${i + 1}`,
 }));
 
 // Then modify your galleryItems array to use both image sets
-const galleryItems = [...samarohImages, ...samanvayImages, ...sameekshaImages, ...snehaImages, ...sadhanaImages, ...snatakImages, ...sanmanImages, ...satakshiImages, ...sanghibhavImages, ...samskritiImages];
+const galleryItems = [
+  ...samarohImages,
+  ...samanvayImages,
+  ...sameekshaImages,
+  ...snehaImages,
+  ...sadhanaImages,
+  ...snatakImages,
+  ...sanmanImages,
+  ...satakshiImages,
+  ...sanghibhavImages,
+  ...samskritiImages,
+];
 
 const ImageDialog = ({
   isOpen,
@@ -203,12 +253,13 @@ const ImageDialog = ({
 
   // Get total images for current category
   const totalImages = galleryItems.filter(
-    item => item.category === currentImage.category
+    (item) => item.category === currentImage.category
   ).length;
-  
+
   // Get current image number within its category
   const currentNumber = galleryItems.filter(
-    item => item.category === currentImage.category && item.id <= currentImage.id
+    (item) =>
+      item.category === currentImage.category && item.id <= currentImage.id
   ).length;
 
   return (
@@ -297,167 +348,175 @@ export default function LifeAtSsim() {
   }, [handleKeyPress]);
 
   return (
-    <div className="container mx-auto px-4 py-8 sm:pb-16 bg-gradient-to-b from-gray-50 to-white">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="mb-7"
-      >
-        <WordPullUp
-          words="Explore Life at SSIM"
-          className="text-4xl md:text-5xl text-left sm:text-center font-bold tracking-tight text-mainBlue mt-8 mb-4 md:mb-6"
-        />
-        <p className="text-base text-center max-w-7xl mx-auto text-gray-600">
-          Siva Sivani strongly believes in motivating the students to become
-          leaders by giving them ample opportunities to explore the talent
-          within them. In order to provide such opportunities SSIM has designed
-          various Extra Curricular Activities to enable the students to
-          understand the importance of co-ordination, teamwork, group dynamics,
-          oneness etc. To give a structure to these, SSIM has named these
-          activities uniquely starting the first letter of every activity with
-          an 'S' as in 'Siva Sivani'. The programmes are detailed below
-        </p>
-      </motion.div>
-
-      <div className="relative max-w-7xl mx-auto w-full mb-8 px-4">
-        {/* Navigation buttons */}
-        <div className="absolute left-0 sm:-left-6 top-1/2 -translate-y-1/2 z-20">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-8 w-8 rounded-full bg-background/80 backdrop-blur-sm shadow-lg hover:bg-background"
-            onClick={() => {
-              const container = document.querySelector(".filter-scroll");
-              if (container)
-                container.scrollBy({ left: -200, behavior: "smooth" });
-            }}
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </Button>
-        </div>
-
-        {/* Filter Scroll */}
+    <>
+      <SEO
+        title="Life at SSIM"
+        description="Experience the vibrant student life at Siva Sivani Institute of Management (SSIM). Explore our campus, events, clubs, and the holistic development opportunities we offer."
+        keywords="SSIM student life, campus life, student clubs, college events, SSIM culture"
+        canonicalUrl="https://www.ssim.ac.in/students-life/life-at-ssim"
+      />
+      <div className="container mx-auto px-4 py-8 sm:pb-16 bg-gradient-to-b from-gray-50 to-white">
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="flex gap-2 max-w-7xl mx-auto overflow-x-auto hide-scrollbar filter-scroll py-2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-7"
         >
-          {categories.map((category, index) => (
-            <motion.div
-              key={category.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                transition: { delay: index * 0.1 },
-              }}
-              className="flex-none first:ml-8 sm:first:ml-2 last:mr-8 sm:last:mr-2"
-            >
-              <Button
-                variant={activeCategory === category.id ? "default" : "outline"}
-                onClick={() => setActiveCategory(category.id)}
-                className={cn(
-                  "transition-all duration-200 hover:scale-105 whitespace-nowrap shadow-sm hover:shadow-md",
-                  activeCategory === category.id &&
-                    "ring-2 ring-primary/20 bg-primary text-primary-foreground font-medium"
-                )}
-              >
-                <span>{category.icon}</span>
-                {category.label}
-              </Button>
-            </motion.div>
-          ))}
+          <WordPullUp
+            words="Explore Life at SSIM"
+            className="text-4xl md:text-5xl text-left sm:text-center font-bold tracking-tight text-mainBlue mt-8 mb-4 md:mb-6"
+          />
+          <p className="text-base text-center max-w-7xl mx-auto text-gray-600">
+            Siva Sivani strongly believes in motivating the students to become
+            leaders by giving them ample opportunities to explore the talent
+            within them. In order to provide such opportunities SSIM has
+            designed various Extra Curricular Activities to enable the students
+            to understand the importance of co-ordination, teamwork, group
+            dynamics, oneness etc. To give a structure to these, SSIM has named
+            these activities uniquely starting the first letter of every
+            activity with an 'S' as in 'Siva Sivani'. The programmes are
+            detailed below
+          </p>
         </motion.div>
 
-        <div className="absolute right-0 sm:-right-6 top-1/2 -translate-y-1/2 z-20">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-8 w-8 rounded-full bg-background/80 backdrop-blur-sm shadow-lg hover:bg-background"
-            onClick={() => {
-              const container = document.querySelector(".filter-scroll");
-              if (container)
-                container.scrollBy({ left: 200, behavior: "smooth" });
-            }}
+        <div className="relative max-w-7xl mx-auto w-full mb-8 px-4">
+          {/* Navigation buttons */}
+          <div className="absolute left-0 sm:-left-6 top-1/2 -translate-y-1/2 z-20">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8 rounded-full bg-background/80 backdrop-blur-sm shadow-lg hover:bg-background"
+              onClick={() => {
+                const container = document.querySelector(".filter-scroll");
+                if (container)
+                  container.scrollBy({ left: -200, behavior: "smooth" });
+              }}
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+          </div>
+
+          {/* Filter Scroll */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="flex gap-2 max-w-7xl mx-auto overflow-x-auto hide-scrollbar filter-scroll py-2"
           >
-            <ChevronRight className="h-4 w-4" />
-          </Button>
-        </div>
-      </div>
-
-      {categories.find((cat) => cat.id === activeCategory)?.heading && (
-        <WordPullUp
-          words={categories.find((cat) => cat.id === activeCategory)?.heading}
-          className="text-2xl md:text-4xl text-left sm:text-center font-bold tracking-tight text-mainBlue mt-8 mb-4 md:mb-6"
-        />
-      )}
-      {categories.find((cat) => cat.id === activeCategory)?.description && (
-        <p className="text-base text-center max-w-7xl mx-auto text-gray-600">
-          {categories.find((cat) => cat.id === activeCategory)?.description}
-        </p>
-      )}
-
-      {/* Gallery Items */}
-      <motion.div
-        layout
-        className="grid mx-auto max-w-7xl grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-6 mt-10"
-      >
-        <AnimatePresence mode="wait">
-          {isLoading
-            ? Array.from({ length: 8 }, (_, i) => (
-                <motion.div
-                  key={`skeleton-${i}`}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2 }}
+            {categories.map((category, index) => (
+              <motion.div
+                key={category.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  transition: { delay: index * 0.1 },
+                }}
+                className="flex-none first:ml-8 sm:first:ml-2 last:mr-8 sm:last:mr-2"
+              >
+                <Button
+                  variant={
+                    activeCategory === category.id ? "default" : "outline"
+                  }
+                  onClick={() => setActiveCategory(category.id)}
+                  className={cn(
+                    "transition-all duration-200 hover:scale-105 whitespace-nowrap shadow-sm hover:shadow-md",
+                    activeCategory === category.id &&
+                      "ring-2 ring-primary/20 bg-primary text-primary-foreground font-medium"
+                  )}
                 >
-                  <Skeleton className="w-full aspect-[4/3] rounded-xl" />
-                </motion.div>
-              ))
-            : filteredItems.map((item, index) => (
-                <Dialog key={item.id}>
-                  <DialogTrigger asChild>
-                    <motion.div
-                      whileHover={{ scale: 1.02 }}
-                      className="cursor-pointer group relative overflow-hidden rounded-sm shadow-lg bg-white"
-                      onClick={() => {
-                        setCurrentImageIndex(index);
-                        setIsDialogOpen(true);
-                      }}
-                    >
-                      <div className="aspect-[4/3] relative">
-                        <img
-                          src={item.src}
-                          alt={item.alt}
-                          loading="lazy"
-                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                        />
-                        {/* <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors duration-300 flex items-center justify-center text-white">
+                  <span>{category.icon}</span>
+                  {category.label}
+                </Button>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <div className="absolute right-0 sm:-right-6 top-1/2 -translate-y-1/2 z-20">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8 rounded-full bg-background/80 backdrop-blur-sm shadow-lg hover:bg-background"
+              onClick={() => {
+                const container = document.querySelector(".filter-scroll");
+                if (container)
+                  container.scrollBy({ left: 200, behavior: "smooth" });
+              }}
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+
+        {categories.find((cat) => cat.id === activeCategory)?.heading && (
+          <WordPullUp
+            words={categories.find((cat) => cat.id === activeCategory)?.heading}
+            className="text-2xl md:text-4xl text-left sm:text-center font-bold tracking-tight text-mainBlue mt-8 mb-4 md:mb-6"
+          />
+        )}
+        {categories.find((cat) => cat.id === activeCategory)?.description && (
+          <p className="text-base text-center max-w-7xl mx-auto text-gray-600">
+            {categories.find((cat) => cat.id === activeCategory)?.description}
+          </p>
+        )}
+
+        {/* Gallery Items */}
+        <motion.div
+          layout
+          className="grid mx-auto max-w-7xl grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-6 mt-10"
+        >
+          <AnimatePresence mode="wait">
+            {isLoading
+              ? Array.from({ length: 8 }, (_, i) => (
+                  <motion.div
+                    key={`skeleton-${i}`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Skeleton className="w-full aspect-[4/3] rounded-xl" />
+                  </motion.div>
+                ))
+              : filteredItems.map((item, index) => (
+                  <Dialog key={item.id}>
+                    <DialogTrigger asChild>
+                      <motion.div
+                        whileHover={{ scale: 1.02 }}
+                        className="cursor-pointer group relative overflow-hidden rounded-sm shadow-lg bg-white"
+                        onClick={() => {
+                          setCurrentImageIndex(index);
+                          setIsDialogOpen(true);
+                        }}
+                      >
+                        <div className="aspect-[4/3] relative">
+                          <img
+                            src={item.src}
+                            alt={item.alt}
+                            loading="lazy"
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                          {/* <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors duration-300 flex items-center justify-center text-white">
                           <ImageIcon className="h-8 w-8" />
                         </div> */}
-                      </div>
-                    </motion.div>
-                  </DialogTrigger>
-                </Dialog>
-              ))}
-        </AnimatePresence>
-      </motion.div>
+                        </div>
+                      </motion.div>
+                    </DialogTrigger>
+                  </Dialog>
+                ))}
+          </AnimatePresence>
+        </motion.div>
 
-      {/* Image Dialog */}
-      <ImageDialog
-        isOpen={isDialogOpen}
-        onOpenChange={setIsDialogOpen}
-        currentImage={filteredItems[currentImageIndex]}
-        onPrevious={handlePrevious}
-        onNext={handleNext}
-      />
-    </div>
+        {/* Image Dialog */}
+        <ImageDialog
+          isOpen={isDialogOpen}
+          onOpenChange={setIsDialogOpen}
+          currentImage={filteredItems[currentImageIndex]}
+          onPrevious={handlePrevious}
+          onNext={handleNext}
+        />
+      </div>
+    </>
   );
 }
-
-
-
 
 // import React, { useState, useEffect, useCallback } from "react";
 // import { motion, AnimatePresence } from "framer-motion";
