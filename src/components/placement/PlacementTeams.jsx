@@ -135,7 +135,7 @@ const TeamMember = ({
         <div className="mb-6 flex flex-col items-center">
           <div className="mb-4">
             <Avatar className="h-36 w-36 border-4 border-blue-100 transition-transform duration-300 group-hover:scale-105">
-              <AvatarImage className="scale-125" src={imageSrc} alt={name} />
+              <AvatarImage className="scale-[1.13]" src={imageSrc} alt={name} />
               <AvatarFallback className="bg-blue-50 text-lg font-bold text-blue-600">
                 {initials}
               </AvatarFallback>
