@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Calendar } from "lucide-react";
 import Heading from "@/components/Heading";
@@ -7,42 +6,14 @@ import Container from "@/components/wrappers/Container";
 import { AnimatedList } from "@/components/ui/animated-list";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
+import { blogPosts } from "@/data/blogData";
 
 export default function LatestBlogsAndEvents() {
-  const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    async function fetchBlogPosts() {
-      try {
-        setIsLoading(true);
-        const response = await fetch(
-          "https://ssim.ac.in/wp-json/wp/v2/posts/?_embed"
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch blog posts");
-        }
-        const data = await response.json();
-        setPosts(data);
-      } catch (err) {
-        setError(err.message);
-        console.error("Error fetching blog posts:", err);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    fetchBlogPosts();
-  }, []);
-
   // Get the first (latest) post for the FirstBlog component
-  const latestPost = posts.length > 0 ? posts[0] : null;
-
-  // console.log(latestPost.link);
+  const latestPost = blogPosts.length > 0 ? blogPosts[0] : null;
 
   // Get posts 2-4 (indices 1-3) for the AnimatedList
-  const eventPosts = posts.length > 1 ? posts.slice(1, 5) : [];
+  const eventPosts = blogPosts.length > 1 ? blogPosts.slice(1, 5) : [];
 
   return (
     <>
@@ -53,45 +24,35 @@ export default function LatestBlogsAndEvents() {
           className="w-full text-center sm:col-span-4 "
         />
 
-        {isLoading ? (
-          <div className="flex items-center justify-center h-[500px]">
-            <p>Loading blog posts...</p>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 h-[720px] sm:max-h-[500px]">
+          {latestPost && (
+            <a href={`/blog/${latestPost.slug}`}>
+              {" "}
+              <FirstBlog post={latestPost} />{" "}
+            </a>
+          )}
+          <div className="grid grid-cols-1 gap-5 relative overflow-hidden h-full">
+            <AnimatedList>
+              {eventPosts.map((post) => (
+                <a href={`/blog/${post.slug}`} key={post.id}>
+                  <EventCard
+                    key={post.id}
+                    id={post.id}
+                    image={
+                      post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || ""
+                    }
+                    title={post.title?.rendered || ""}
+                    date={new Date(post.date).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                    })}
+                  />
+                </a>
+              ))}
+            </AnimatedList>
           </div>
-        ) : error ? (
-          <div className="flex items-center justify-center h-[500px]">
-            <p className="text-red-500">Error: {error}</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 h-[720px] sm:max-h-[500px]">
-            {latestPost && (
-              <a href={`/blog/${latestPost.slug}`}>
-                {" "}
-                <FirstBlog post={latestPost} />{" "}
-              </a>
-            )}
-            <div className="grid grid-cols-1 gap-5 relative overflow-hidden h-full">
-              <AnimatedList>
-                {eventPosts.map((post) => (
-                  <a href={post.link} key={post.id}>
-                    <EventCard
-                      key={post.id}
-                      id={post.id}
-                      image={
-                        post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
-                        ""
-                      }
-                      title={post.title?.rendered || ""}
-                      date={new Date(post.date).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                      })}
-                    />
-                  </a>
-                ))}
-              </AnimatedList>
-            </div>
-          </div>
-        )}
+        </div>
+
         <Link
           to="/blog"
           className="flex justify-center mt-8"
@@ -122,21 +83,21 @@ export default function LatestBlogsAndEvents() {
 const EventCard = ({ id, image, title, date }) => {
   return (
     <Card key={id} className="p-0 rounded-none ">
-      <CardContent className="flex p-0 space-x-3 sm:space-x-4 h-32 sm:h-32">
+      <CardContent className="flex flex-col xs:flex-row p-0 space-x-3 sm:space-x-4 h-full xs:h-32 sm:h-32">
         <img
           src={image}
           alt={title}
-          className="object-cover h-full aspect-video"
+          className="object-cover h-full xs:h-32 xs:aspect-video"
         />
-        <div className="flex flex-col items-start justify-center flex-grow gap-2 sm:gap-3 ml-2">
-          <span className="top-0 px-4 py-1 text-xs sm:text-sm font-semibold tracking-wide text-white w-fit sm:mx-0 bg-mainBlue">
+        <div className="flex flex-col items-start p-5 xs:p-0 justify-center flex-grow gap-2 sm:gap-3 ml-2">
+          <span className="hidden xs:block top-0 px-4 py-1 text-xs sm:text-sm font-semibold tracking-wide text-white w-fit sm:mx-0 bg-mainBlue">
             Trending
           </span>
           <p className="flex items-center mr-2 text-xs sm:text-lg font-semibold text-red-600">
             <Calendar size="14" className="mr-2 text-red-600 " /> {date}
           </p>
           <p
-            className="text-sm sm:text-lg font-semibold sm:font-bold text-gray-800 line-clamp-1 pr-2"
+            className="text-lg xs:text-sm sm:text-lg font-semibold sm:font-bold text-gray-800 line-clamp-1 pr-2"
             dangerouslySetInnerHTML={{ __html: title }}
           />
         </div>
@@ -154,13 +115,13 @@ const FirstBlog = ({ post }) => {
   });
 
   return (
-    <Card className="relative rounded-none sm:h-full h-[262px] overflow-hidden">
-      <CardContent className="p-0 rounded-none sm:h-full h-[262px]">
+    <Card className="relative rounded-none sm:h-full xs:h-[262px] overflow-hidden">
+      <CardContent className="p-0 rounded-none sm:h-full xs:h-[262px]">
         <div className="h-full ">
           <img
             src={imageUrl}
             alt="Main event"
-            className="object-cover blur-sm w-full sm:h-full h-[262px] aspect-video"
+            className="object-cover blur-sm w-full sm:h-full xs:h-[262px] aspect-video"
           />
           <div className="absolute  bottom-0 left-0 right-0 p-3 space-y-2 sm:p-10 sm:space-y-4 bg-gradient-to-t from-black to-transparent">
             <div className="relative space-y-2">
