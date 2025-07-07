@@ -78,7 +78,7 @@ const EventCard = ({ event }) => {
             alt={event.title}
             width={400}
             height={240}
-            className="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-48 object-cover object-center group-hover:scale-105 transition-transform duration-300"
           />
           {/* <div className="absolute top-3 left-3">
             <Badge variant="secondary" className="bg-white/90 text-gray-700">
