@@ -12,7 +12,7 @@ import Chandra from "../../assets/about/BoardOfGoverners/SF Chandra.webp";
 import DrArijit from "../../assets/about/BoardOfGoverners/DR Arijit.webp";
 import Harish from "../../assets/about/BoardOfGoverners/Dr_Harish.jpg";
 import Jayalakshmi from "../../assets/about/BoardOfGoverners/Dr.-V.Jayalakshmi_b.jpg";
-import ThirumalReddy from "../../assets/about/BoardOfGoverners/THIRUMALREDDY.webp";
+import ThirumalReddy from "../../assets/about/BoardOfGoverners/THIRUMALREDDY.jpg";
 import VipulSingh from "../../assets/about/BoardOfGoverners/vipulsingh.jpg";
 
 export default function BoardOfGovernors() {

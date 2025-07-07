@@ -159,7 +159,7 @@ export default function BlogDetail() {
 
               {/* Main Title */}
               <h1 
-                className="text-5xl md:text-6xl font-bold text-mainBlue leading-tight"
+                className="text-3xl sm:text-5xl md:text-6xl font-bold text-mainBlue leading-tight"
                 dangerouslySetInnerHTML={{ 
                   __html: blog.title 
                 }}
@@ -196,7 +196,7 @@ export default function BlogDetail() {
             </div>
 
             {/* Featured Image */}
-            <div className="relative h-[400px] rounded-2xl overflow-hidden">
+            <div className="relative aspect-video w-full sm:h-[400px] rounded-2xl overflow-hidden">
               <img
                 src={blog.imageUrl}
                 alt="Blog featured image"
