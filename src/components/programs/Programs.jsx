@@ -2246,32 +2246,25 @@ const Curriculum = ({ curriculum }) => {
                               </div> */}
                             {/* </div> */}
                             <div className="md:col-span-2">
-                              <Accordion
-                                type="single"
-                                collapsible
-                                className="w-full"
-                              >
+                              <div className="w-full">
                                 {data.topics.map((topic, index) => (
-                                  <AccordionItem
+                                  <div
                                     key={index}
-                                    value={`item-${index}`}
-                                    className="bg-white mb-4 rounded-xl border border-slate-100 overflow-hidden group data-[state=open]:shadow-md transition-all duration-300"
+                                    className="bg-white mb-4 rounded-xl border border-slate-100 overflow-hidden group transition-all duration-300 px-6 py-4"
                                   >
-                                    <AccordionTrigger className="px-6 py-4 hover:no-underline group-data-[state=open]:bg-slate-50 transition-colors duration-300">
-                                      <div className="flex items-center gap-4">
-                                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                                          <span className="font-bold text-primary text-lg">
-                                            {index + 1}
-                                          </span>
-                                        </div>
-                                        <span className="text-base sm:text-lg text-left font-medium">
-                                          {topic.title}
+                                    <div className="flex items-center gap-4">
+                                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                                        <span className="font-bold text-primary text-lg">
+                                          {index + 1}
                                         </span>
                                       </div>
-                                    </AccordionTrigger>
-                                  </AccordionItem>
+                                      <span className="text-base sm:text-lg text-left font-medium">
+                                        {topic.title}
+                                      </span>
+                                    </div>
+                                  </div>
                                 ))}
-                              </Accordion>
+                              </div>
                             </div>
                           </div>
                         </TabsContent>
