@@ -90,15 +90,15 @@ export default function HomePage() {
       <div className="bg-gray-50 text-gray-800">
         {[
           <HeroSlider key="hero-slider" />,
-          <ImmLegacySection key="imm-legacy-section" />,
+          // <ImmLegacySection key="imm-legacy-section" />,
           <AboutSection key="about-section" />,
           <AcademicPrograms key="academic-programs" />,
           <Carousel key="carousel" />,
           <LatestBlogsAndEvents key="latest-blogs-and-events" />,
           <RadialIcons key="radial-icons" />,
           <LiveProjects key="live-projects" />,
-          <UpcomingEvents key="upcoming-events" />,
-          <Testimonial key="testimonial" />,
+          // <UpcomingEvents key="upcoming-events" />,
+          // <Testimonial key="testimonial" />,
         ].map((component) => (
           <SectionWrapper key={component.key}>{component}</SectionWrapper>
         ))}
