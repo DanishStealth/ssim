@@ -152,7 +152,7 @@ function LeaderCard({ leader }) {
       </Card>
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="max-w-2xl max-h-[80vh] overflow-hidden">
-          <DialogHeader className="pb-4">
+          <DialogHeader className="pb-4 pt-5 sm:pt-0">
             <DialogTitle>
               {leader.name} - {leader.role}
             </DialogTitle>
