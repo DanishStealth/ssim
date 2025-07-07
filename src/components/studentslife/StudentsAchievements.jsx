@@ -68,7 +68,7 @@ const StudentsAchievements = () => {
                   <img
                     src={event.image}
                     alt={event.title}
-                    className="w-full h-auto aspect-video object-cover scale-110"
+                    className="w-full h-auto aspect-video object-contain"
                   />
                   <CardContent className="p-4 mt-4 space-y-3">
                     <h3 className="text-2xl font-bold line-clamp-2">
