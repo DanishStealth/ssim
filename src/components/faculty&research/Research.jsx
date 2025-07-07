@@ -162,14 +162,14 @@ function ResearchSection() {
                 className="h-full w-full object-cover transition-transform hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-              <Button
+              {/* <Button
                 variant="secondary"
                 size="icon"
                 className="absolute bottom-4 right-4 h-14 w-14 rounded-full backdrop-blur-sm transition-transform hover:scale-110"
                 onClick={() => setVideoOpen(true)}
               >
                 <PlayCircle className="h-8 w-8" />
-              </Button>
+              </Button> */}
             </div>
 
             {/* Background pattern */}

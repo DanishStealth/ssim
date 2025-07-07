@@ -227,6 +227,7 @@ export default function App() {
                   element={<Navigate to="case-research-center" replace />}
                 />
                 <Route path="case-research-center" element={<Research />} />
+                <Route path="conferences" element={<Conferences />} />
               </Route>
               <Route
                 path="/placement"
@@ -262,7 +263,6 @@ export default function App() {
                 path="/students-life/students-feedback"
                 element={<StudentsFeedback />}
               />
-              <Route path="/research/conferences" element={<Conferences />} />
               <Route path="/admissions/fpm-efpm" element={<FPM />} />
               <Route
                 path="/admissions/pgdm-triple-specialisation"
