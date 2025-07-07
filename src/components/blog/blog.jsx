@@ -218,7 +218,7 @@ export default function BlogSection() {
             transition={{ duration: 0.5 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl sm:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-mainBlue inline-block">
+            <h2 className="text-3xl sm:text-5xl font-bold mb-4 pb-2 bg-clip-text text-transparent bg-mainBlue inline-block">
               Our recent blogs
             </h2>
             <div className="w-20 h-1 bg-mainBlue mx-auto mb-6"></div>
@@ -251,7 +251,7 @@ export default function BlogSection() {
                       >
                         {/* Image container - Fixed the overflow issue */}
                         <div className="md:w-1/2 relative overflow-hidden">
-                          <div className="aspect-video md:h-full">
+                          <div className=" md:aspect-video md:h-full">
                             <img
                               src={post.image || "/placeholder.svg"}
                               alt={post.imageAlt}
