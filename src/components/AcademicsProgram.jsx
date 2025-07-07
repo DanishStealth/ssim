@@ -55,6 +55,7 @@ export default function AcademicPrograms() {
       ],
       video: "https://www.youtube.com/watch?v=aurjFtjWkIc",
       link: "/programs/pgdm-triple-specialisation",
+      link1: "https://apply.ssim.ac.in",
     },
     {
       title: "PGDM - BIFS",
@@ -96,6 +97,7 @@ export default function AcademicPrograms() {
       ],
       video: "https://www.youtube.com/watch?v=beOxW30taGk",
       link: "/programs/pgdm-bifs",
+      link1: "https://apply.ssim.ac.in",
     },
     {
       title: "PGDM - BA",
@@ -138,6 +140,7 @@ export default function AcademicPrograms() {
       ],
       video: "https://www.youtube.com/watch?v=-7EavtYSQrA",
       link: "/programs/pgdm-ba",
+      link1: "https://apply.ssim.ac.in",
     },
     {
       title: "FPM / EFPM",
@@ -167,6 +170,7 @@ export default function AcademicPrograms() {
       ],
       video: "https://www.youtube.com/watch?v=y-GwG39jVZc",
       link: "/programs/fpm-efpm",
+      link1: "https://apply.ssim.ac.in/fellowship-program-application-form",
     },
   ];
 
@@ -284,7 +288,7 @@ export default function AcademicPrograms() {
                 <ArrowRight className="w-4 bg-mainBlue h-4 transition-transform group-hover:translate-x-1" />
               </div>
             </Link>
-            <a href="https://apply.ssim.ac.in" target="_blank">
+            <a href={features[activeVideo].link1} target="_blank">
               <Button
                 className="group gap-0 px-0 py-0 h-0 ml-5 sm:ml-8 rounded-none mt-8"
                 size="lg"
