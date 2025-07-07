@@ -93,7 +93,7 @@ export default function LatestBlogsAndEvents() {
           </div>
         )}
         <Link
-          to="/blogs"
+          to="/blog"
           className="flex justify-center mt-8"
           onClick={() => {
             window.scrollTo({
