@@ -2170,7 +2170,7 @@ const Curriculum = ({ curriculum }) => {
           {/* Renders the tab-based detailed curriculum view if data for it exists */}
           {detailedCurriculumData && (
             <section className={`py-5`}>
-              <div className="container mx-auto relative z-10">
+              <div className="mx-auto relative z-10">
                 <Tabs defaultValue="module1" className="max-w-4xl mx-auto">
                   <TabsList className="grid grid-cols-6 mb-12 p-1 bg-slate-100 rounded-full">
                     {/* Static tabs for now */}
@@ -2221,18 +2221,18 @@ const Curriculum = ({ curriculum }) => {
                           value={moduleKey}
                           className="transition-all duration-500 ease-in-out"
                         >
-                          <div className="grid md:grid-cols-3 gap-8">
-                            <div className="md:col-span-1 h-min bg-white p-8 rounded-2xl shadow-lg border border-slate-100">
-                              <h3 className="text-xl font-bold mb-2">
-                                {data.title}
+                          <div className="grid md:grid-cols-1 sm:gap-8">
+                            {/* <div className="md:col-span-1 h-min bg-white p-8 rounded-2xl shadow-lg border border-slate-100"> */}
+                              <h3 className="sm:text-3xl text-xl sm:ml-7 mb-5 flex items-center text-gray-700 font-bold ">
+                              <BookOpen className="h-8 w-8 text-primary mr-3 mt-2" /> {data.title}
                               </h3>
-                              <div className="flex items-center gap-2 mb-4">
+                              {/* <div className="flex items-center gap-2 mb-4">
                                 <Badge variant="outline" className="text-sm">
                                   <CalendarIcon className="h-3 w-3 mr-1" />
                                   {data.duration}
                                 </Badge>
-                              </div>
-                              <p className="text-muted-foreground mb-6">
+                              </div> */}
+                              {/* <p className="text-muted-foreground mb-6">
                                 {data.description}
                               </p>
                               <div className="mt-auto pt-4 border-t">
@@ -2243,8 +2243,8 @@ const Curriculum = ({ curriculum }) => {
                                   Download Syllabus{" "}
                                   <Download className="h-4 w-4" />
                                 </Button>
-                              </div>
-                            </div>
+                              </div> */}
+                            {/* </div> */}
                             <div className="md:col-span-2">
                               <Accordion
                                 type="single"
@@ -2260,11 +2260,11 @@ const Curriculum = ({ curriculum }) => {
                                     <AccordionTrigger className="px-6 py-4 hover:no-underline group-data-[state=open]:bg-slate-50 transition-colors duration-300">
                                       <div className="flex items-center gap-4">
                                         <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                                          <span className="font-bold text-primary">
+                                          <span className="font-bold text-primary text-lg">
                                             {index + 1}
                                           </span>
                                         </div>
-                                        <span className="text-lg font-medium">
+                                        <span className="text-base sm:text-lg text-left font-medium">
                                           {topic.title}
                                         </span>
                                       </div>
