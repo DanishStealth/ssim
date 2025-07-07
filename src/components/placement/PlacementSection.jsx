@@ -24,7 +24,7 @@ import {
   TrendingUpIcon,
   UsersIcon,
   Building2Icon as BuildingOffice2Icon,
-  PercentIcon,
+  Rocket,
 } from "lucide-react";
 import {
   Select,
@@ -91,7 +91,7 @@ export default function PlacementSection() {
     if (!apiStudentsData || apiStudentsData.length === 0) {
         return {
             totalPlacements: 0,
-            averageSalary: "0K",
+            averageSalary: "6.91LPA",
             companiesHiring: 0,
             placementRate: "0%",
         };
@@ -105,7 +105,7 @@ export default function PlacementSection() {
       ? `${(totalSalary / totalPlacements)
           .toFixed(0)
           .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}${totalPlacements > 0 && totalSalary > 0 ? '' : 'K'}`
-      : "0K";
+      : "6.91LPA";
     const companiesHiring = new Set(apiStudentsData.map((s) => s.company)).size;
     const placementRate = "92%";
 
@@ -259,7 +259,7 @@ export default function PlacementSection() {
                     </div>
                     <div>
                       <CardTitle className="text-3xl font-bold text-red-600">
-                        {stats.averageSalary}
+                        6.91LPA
                       </CardTitle>
                       <CardDescription className="text-base">
                         Average Salary
@@ -270,14 +270,14 @@ export default function PlacementSection() {
                 <Card className="group hover:shadow-lg hover:translate-y-[-10px] transition-all duration-200 hover:border-primary/20">
                   <CardHeader className="pb-2 space-y-4">
                     <div className="w-12 h-12 rounded-lg bg-mainBlue flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <TrendingUpIcon className="w-6 h-6 text-white" />
+                      <Rocket className="w-6 h-6 text-white" />
                     </div>
                     <div>
                       <CardTitle className="text-3xl font-bold text-red-600">
-                        {stats.averageSalary}
+                        98.74%
                       </CardTitle>
                       <CardDescription className="text-base">
-                        Highest Salary
+                        Students Placed
                       </CardDescription>
                     </div>
                   </CardHeader>
