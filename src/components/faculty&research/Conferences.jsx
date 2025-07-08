@@ -1337,8 +1337,11 @@ function Tourists() {
         <div className="flex justify-center mt-14 text-2xl font-bold text-mainBlue mb-2">
           MANY MORE TO VISIT ..........
         </div>
-        <div className="flex justify-center gap-4 items-center mt-12 text-4xl font-bold text-mainBlue mb-2">
-          Click Here for
+        <div className="flex flex-col sm:flex-row justify-center gap-10 sm:gap-4 items-center mt-12 sm:text-4xl text-2xl font-bold text-mainBlue mb-2">
+          <span className="flex items-center gap-2">
+            Click Here for{" "}
+            <span className="sm:hidden animate-bounce text-3xl"> 👇</span>
+          </span>
           <a
             href="https://docs.google.com/forms/d/e/1FAIpQLSeRGLfK3Sm-kHebrzupY8OFywkmXG-oGuCXnXBH0e4-ZQd6fg/viewform"
             className="flex items-center"
