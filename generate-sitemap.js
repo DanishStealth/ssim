@@ -14,7 +14,7 @@ async function generateSitemap() {
 
     try {
         const sitemap = new SitemapStream({ hostname: BASE_URL });
-        const writeStream = createWriteStream('./public/sitemap.xml');
+        const writeStream = createWriteStream('./dist/sitemap.xml');
         sitemap.pipe(writeStream);
 
         // --- Static Routes ---
@@ -54,23 +54,38 @@ async function generateSitemap() {
         console.log('Fetching blog posts...');
         let allPosts = [];
         let page = 1;
-        const perPage = 100; // Fetch 100 posts per page
+        const perPage = 100;
 
-        while (true) {
-            const response = await axios.get(WORDPRESS_API_URL, {
-                params: {
-                    per_page: perPage,
-                    page: page,
-                    _fields: 'slug,modified', // Only fetch necessary fields
-                },
-            });
+        // Fetch the first page to get total pages from headers
+        const firstPageResponse = await axios.get(WORDPRESS_API_URL, {
+            params: {
+                per_page: perPage,
+                page: page,
+                _fields: 'slug,modified',
+            },
+        });
 
-            if (response.data.length === 0) {
-                break; // No more posts
+        allPosts = allPosts.concat(firstPageResponse.data);
+        const totalPages = parseInt(firstPageResponse.headers['x-wp-totalpages'], 10);
+
+        // Fetch remaining pages if there are more than one
+        if (totalPages > 1) {
+            for (page = 2; page <= totalPages; page++) {
+                try {
+                    const subsequentPageResponse = await axios.get(WORDPRESS_API_URL, {
+                        params: {
+                            per_page: perPage,
+                            page: page,
+                            _fields: 'slug,modified',
+                        },
+                    });
+                    allPosts = allPosts.concat(subsequentPageResponse.data);
+                } catch (error) {
+                    console.error(`Error fetching page ${page}:`, error.response ? error.response.data : error.message);
+                    // Decide if you want to continue or break on error
+                    // For example, to stop: break;
+                }
             }
-
-            allPosts = allPosts.concat(response.data);
-            page++;
         }
 
         console.log(`Found ${allPosts.length} blog posts.`);
@@ -86,11 +101,11 @@ async function generateSitemap() {
         sitemap.end();
 
         writeStream.on('finish', () => {
-            console.log('Sitemap generated successfully at ./public/sitemap.xml');
+            console.log('Sitemap generated successfully at ./dist/sitemap.xml');
         });
 
     } catch (error) {
-        console.error('Error generating sitemap:', error);
+        console.error('Error generating sitemap:', error.response ? error.response.data : error.message);
     }
 }
 
