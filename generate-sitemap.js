@@ -1,6 +1,8 @@
-import { createWriteStream } from 'fs';
+import { createWriteStream, readFileSync } from 'fs';
 import { SitemapStream } from 'sitemap';
 import axios from 'axios';
+import * as parser from '@babel/parser';
+import traverse from '@babel/traverse';
 import { routeConfigs } from './src/utils/routeConfig.js';
 
 // Your website's base URL
@@ -8,6 +10,75 @@ const BASE_URL = 'https://ssim.ac.in';
 
 // WordPress API endpoint
 const WORDPRESS_API_URL = 'https://ssim.ac.in/wp-json/wp/v2/posts';
+
+function getStaticRoutes() {
+    const routes = new Set();
+
+    // 1. Get routes from routeConfig.js
+    Object.keys(routeConfigs).forEach(section => {
+        Object.keys(routeConfigs[section].routes).forEach(route => {
+            const path = `/${section}/${route}`;
+            routes.add(path.replace(/\/+/g, '/'));
+        });
+    });
+
+    // 2. Get routes from App.jsx
+    try {
+        const code = readFileSync('./src/App.jsx', 'utf-8');
+        const ast = parser.parse(code, {
+            sourceType: 'module',
+            plugins: ['jsx']
+        });
+
+        const traverseDefault = typeof traverse === 'function' ? traverse : traverse.default;
+
+        traverseDefault(ast, {
+            JSXElement: path => {
+                if (path.node.openingElement.name.name !== 'Route') return;
+
+                const getPathAttr = (node) => {
+                    const pathAttr = node.openingElement.attributes.find(
+                        attr => attr.name && attr.name.name === 'path'
+                    );
+                    return pathAttr && pathAttr.value ? pathAttr.value.value : null;
+                }
+                
+                const routePath = getPathAttr(path.node);
+                if (!routePath || routePath.includes(':')) return;
+
+                let fullPath = routePath;
+                const parentPaths = [];
+                let current = path;
+                while ((current = current.findParent(p => p.isJSXElement() && p.node.openingElement.name.name === 'Route'))) {
+                    const parentPath = getPathAttr(current.node);
+                    if (parentPath) {
+                        parentPaths.unshift(parentPath);
+                    }
+                }
+
+                if (parentPaths.length > 0) {
+                    fullPath = [...parentPaths, routePath].join('/');
+                }
+
+                fullPath = fullPath.replace(/\/\//g, '/');
+                if (!fullPath.startsWith('/')) {
+                    fullPath = '/' + fullPath;
+                }
+
+                routes.add(fullPath);
+            }
+        });
+    } catch (error) {
+        console.error("Could not parse App.jsx to extract routes. Please check the file for syntax errors.", error);
+    }
+    
+    // Add homepage separately in case it's not found
+    routes.add('/');
+
+    // Convert to sitemap format
+    return Array.from(routes).map(url => ({ url, priority: url === '/' ? 1.0 : 0.8 }));
+}
+
 
 async function generateSitemap() {
     console.log('Generating sitemap...');
@@ -18,33 +89,9 @@ async function generateSitemap() {
         sitemap.pipe(writeStream);
 
         // --- Static Routes ---
-        const staticRoutes = [
-            { url: '/', priority: 1.0 },
-            { url: '/contact-us', priority: 0.8 },
-            { url: '/alumni', priority: 0.8 },
-            { url: '/international-relations', priority: 0.8 },
-            { url: '/blog', priority: 0.8 },
-            { url: '/careers', priority: 0.8 },
-            { url: '/iqac', priority: 0.8 },
-            { url: '/ssim', priority: 0.8 },
-            { url: '/life-at-ssim', priority: 0.8 },
-            { url: '/student-achievements', priority: 0.8 },
-            { url: '/news-and-events', priority: 0.8 },
-            { url: '/accreditations', priority: 0.8 },
-            { url: '/internal-complaints', priority: 0.8 },
-            { url: '/grievance-redressal-mechanism', priority: 0.8 },
-            { url: '/faculty-publication', priority: 0.8 },
-        ];
-
-        Object.keys(routeConfigs).forEach(section => {
-            const sectionConfig = routeConfigs[section];
-            // Add base section route if needed, e.g. /about
-            // staticRoutes.push({ url: `/${section}`, priority: 0.8 });
-            Object.keys(sectionConfig.routes).forEach(route => {
-                staticRoutes.push({ url: `/${section}/${route}`, priority: 0.8 });
-            });
-        });
+        const staticRoutes = getStaticRoutes();
         
+        console.log(`Found ${staticRoutes.length} static routes.`);
         const today = new Date().toISOString();
         staticRoutes.forEach(route => {
             sitemap.write({ url: route.url, lastmod: today, priority: route.priority });
@@ -56,7 +103,6 @@ async function generateSitemap() {
         let page = 1;
         const perPage = 100;
 
-        // Fetch the first page to get total pages from headers
         const firstPageResponse = await axios.get(WORDPRESS_API_URL, {
             params: {
                 per_page: perPage,
@@ -68,7 +114,6 @@ async function generateSitemap() {
         allPosts = allPosts.concat(firstPageResponse.data);
         const totalPages = parseInt(firstPageResponse.headers['x-wp-totalpages'], 10);
 
-        // Fetch remaining pages if there are more than one
         if (totalPages > 1) {
             for (page = 2; page <= totalPages; page++) {
                 try {
@@ -82,8 +127,6 @@ async function generateSitemap() {
                     allPosts = allPosts.concat(subsequentPageResponse.data);
                 } catch (error) {
                     console.error(`Error fetching page ${page}:`, error.response ? error.response.data : error.message);
-                    // Decide if you want to continue or break on error
-                    // For example, to stop: break;
                 }
             }
         }
