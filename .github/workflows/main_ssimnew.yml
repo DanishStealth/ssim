@@ -1,0 +1,65 @@
+name: Build and deploy React app to Azure Web App - ssimnew
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20.x"
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Build the app
+        run: npm run build
+
+      - name: Zip the build output
+        run: (cd dist && zip -r ../release.zip .)
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: react-app
+          path: release.zip
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: react-app
+
+      - name: Verify downloaded artifact
+        run: ls -l
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_09C86A5503D04C1FB98BDFFD313C2457 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_149DCAAFADB44A12A5E43695BAAB6D78 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A88571DD50764DDB80E2A48E8340DAEE }}
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: "ssimnew"
+          slot-name: "Production"
+          package: release.zip
